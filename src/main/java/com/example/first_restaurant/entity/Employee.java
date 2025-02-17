@@ -1,62 +1,31 @@
 package com.example.first_restaurant.entity;
 import jakarta.persistence.*;
-import java.math.BigDecimal;
 
+import java.util.List;
+
+// Entity Classes
 @Entity
-@Table(name = "employee")
+@Table(name = "EMPLOYEE")
 public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "EMPLOYEE_ID")
     private Long id;
 
-    private String name;
-    private String position;
+    @Column(name = "FIRST_NAME")
+    private String firstName;
 
-    @Column(precision = 10, scale = 2)
-    private BigDecimal salary;
+    @Column(name = "LAST_NAME")
+    private String lastName;
 
-    @Column(name = "access_level")
-    private String accessLevel;
+    @Column(name = "PHONE_NUMBER")
+    private String phoneNumber;
 
-    // Getters and setters
+    @Column(name = "IS_ADMIN")
+    private Boolean isAdmin;
 
-    public String getAccessLevel() {
-        return accessLevel;
-    }
+    @OneToMany(mappedBy = "employee")
+    private List<WorkShift> workShifts;
 
-    public void setAccessLevel(String accessLevel) {
-        this.accessLevel = accessLevel;
-    }
-
-    public BigDecimal getSalary() {
-        return salary;
-    }
-
-    public void setSalary(BigDecimal salary) {
-        this.salary = salary;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getPosition() {
-        return position;
-    }
-
-    public void setPosition(String position) {
-        this.position = position;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
+    // Getters and Setters
 }
