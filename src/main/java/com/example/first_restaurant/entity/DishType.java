@@ -18,7 +18,6 @@ public class DishType {
     private List<Dish> dishes;
 
     // Getters and Setters
-
     public String getName() {
         return name;
     }
