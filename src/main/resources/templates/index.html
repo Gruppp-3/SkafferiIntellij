@@ -7,16 +7,20 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
 
     <title>Antons Skafferi</title>
-    <link rel="stylesheet" href="/css/style.css" />
-    <link rel="stylesheet" href="/css/alacarte.css" />
-    <link rel="stylesheet" href="/css/book.css" />
-    <link rel="stylesheet" href="/css/event.css" />
-    <link rel="stylesheet" href="/css/footer.css" />
-    <link rel="stylesheet" href="/css/menu.css" />
-    <link rel="stylesheet" href="/css/VeckansMeny.css" />
-    <link rel="stylesheet" href="/css/about.css" />
+    <link rel="stylesheet" href="/src/main/resources/static/css/style.css" />
+    <link rel="stylesheet" href="/src/main/resources/static/css/alacarte.css" />
+    <link rel="stylesheet" href="/src/main/resources/static/css/book.css" />
+    <link rel="stylesheet" href="/src/main/resources/static/css/event.css" />
+    <link rel="stylesheet" href="/src/main/resources/static/css/footer.css" />
+    <link rel="stylesheet" href="/src/main/resources/static/css/menu.css" />
+    <link rel="stylesheet" href="/src/main/resources/static/css/VeckansMeny.css" />
+    <link rel="stylesheet" href="/src/main/resources/static/css/about.css" />
+    <link rel="stylesheet" href="/src/main/resources/static/css/header.css" />
 
 
 </head>
@@ -24,50 +28,86 @@
 
 <!-- HEADER (Combine Logo + Nav) -->
 <header class="top-header">
+    <!-- Logotyp (visas på både desktop och mobil) -->
     <div class="logo-container">
         <a href="index.html">
-            <img src="/images/logo1.png" alt="Antons Skafferi" class="logo">
+            <img src="/src/main/resources/static/images/logo1.png" alt="Antons Skafferi" class="logo">
         </a>
     </div>
 
+    <!-- Knapp för att öppna/stänga sidomenyn (visas endast på mobila enheter) -->
+    <button class="sidebar-toggle" aria-label="Toggle sidebar">
+        <span class="hamburger"></span>
+    </button>
 
-    <nav class="navbar">
+    <!-- Navigationslänkar (visas på desktop) -->
+    <nav class="navbar desktop-nav">
         <ul>
             <li><a href="#">HEM</a></li>
-            <li><a href="#meno">MENU</a></li>
+            <li><a href="#menu">MENU</a></li>
+            <li><a href="#om-oss">OM OSS</a></li>
             <li><a href="#alacarte">A La Carte</a></li>
             <li><a href="#events">Evenemang</a></li>
-            <li><a href="#om-oss">OM OSS</a></li>
-
         </ul>
     </nav>
 
-    <div class="boka-bord">
+    <!-- "Boka Bord"-knapp (visas på desktop) -->
+    <div class="boka-bord desktop-only">
         <a href="#boka-bord">BOKA BORD</a>
     </div>
+
+    <!-- Sidomeny (visas endast på mobila enheter) -->
+    <nav class="navbar sidebar">
+        <!-- Kryss för att stänga sidomenyn -->
+        <button class="close-sidebar" aria-label="Close sidebar">
+            &times; <!-- Krysssymbol -->
+        </button>
+
+        <!-- Logotyp i sidomenyn -->
+        <div class="logo-container mobile-only">
+            <a href="index.html">
+                <img src="/src/main/resources/static/images/logo1.png" alt="Antons Skafferi" class="logo">
+            </a>
+        </div>
+
+        <!-- Navigationslänkar i sidomenyn -->
+        <ul>
+            <li><a href="#">HEM</a></li>
+            <li><a href="#menu">MENU</a></li>
+            <li><a href="#om-oss">OM OSS</a></li>
+            <li><a href="#alacarte">A La Carte</a></li>
+            <li><a href="#events">Evenemang</a></li>
+        </ul>
+
+        <!-- "Boka Bord"-knapp i sidomenyn -->
+        <div class="boka-bord mobile-only">
+            <a href="#boka-bord">BOKA BORD</a>
+        </div>
+    </nav>
 </header>
 
 
-<!-- Hej here comes a new update-->
+
 <!-- HERO SECTION -->
 <section class="hero">
     <div class="hero-img">
-        <img src="/images/home.png" alt="Antons Skafferi">
+        <img src="/src/main/resources/static/images/home.png" alt="Antons Skafferi">
     </div>
     <div class="hero-content">
         <h1>Välkommen till Anton's Skafferi!</h1>
         <div class="hero-sections">
             <div class="hero-box">
-                <!-- <a href="#menu"><h3>Dagens Lunch</h3></a> -->
-                <h2>Dagens Lunch - Måndag:</h2>
+                <h2>Dagans Meny - Wednesday:</h2>
                 <p><strong>Main Meal 1:</strong> Grilled Chicken with Roasted Vegetables</p>
                 <p><strong>Main Meal 2:</strong> Pasta Primavera</p>
                 <p><strong>Soup:</strong> Tomato Basil Soup</p>
                 <p><strong>Salad:</strong> Your Preference</p>
+
             </div>
         </div>
     </div>
 </section>
+
 
 <!-- WEEKLY MENU SECTION -->
 <section id="meno" class="weekly-menu">
@@ -237,7 +277,7 @@
     <div class="events-row">
         <!-- EVENT 1 -->
         <div class="event-item">
-            <img src="/images/event1.jpg" alt="Rockkväll Trubadur" />
+            <img src="/src/main/resources/static/images/event1.jpg" alt="Rockkväll Trubadur" />
             <h3>Rockkväll Trubadur</h3>
             <p>
                 <span class="event-text"><i class="fas fa-calendar-alt"></i> 20 maj 2025</span><br>
@@ -249,7 +289,7 @@
 
         <!-- EVENT 2 -->
         <div class="event-item">
-            <img src="/images/event2.jpg" alt="Rockkväll Trubadur" />
+            <img src="/src/main/resources/static/images/event2.jpg" alt="Rockkväll Trubadur" />
             <h3>Rockkväll Trubadur</h3>
             <p>
                 <span class="event-text"><i class="fas fa-calendar-alt"></i> 22 juni 2025</span><br>
@@ -261,7 +301,7 @@
 
         <!-- EVENT 3 -->
         <div class="event-item">
-            <img src="/images/event3.jpg" alt="Rockkväll Trubadur" />
+            <img src="/src/main/resources/static/images/event3.jpg" alt="Rockkväll Trubadur" />
             <h3>Rockkväll Trubadur</h3>
             <p>
                 <span class="event-text"><i class="fas fa-calendar-alt"></i> 15 juli 2025</span><br>
@@ -296,7 +336,7 @@
         <!-- RIGHT COLUMN: Image -->
         <div class="about-image">
 
-            <img src="/images/omOss.jpg"alt="Restaurangbild" />
+            <img src="/src/main/resources/static/images/omOss.jpg"alt="Restaurangbild" />
         </div>
     </div>
 </section>
@@ -315,9 +355,11 @@
 
         <!-- Knappmeny -->
         <div class="footer-column footer-buttons">
-            <a href="#meno">Se meny</a>
-            <a href="#">Ladda ner meny</a>
-            <a href="#boka-bord">Boka bord</a>
+            <a href="#">Hem</a>
+            <a href="#meno">Menu</a>
+            <a href="#om-oss">Om Oss</a>
+            <a href="#alacarte">A La Carte</a>
+            <a href="#events">Evenemang</a>
         </div>
 
         <!-- Öppettider -->
@@ -361,6 +403,25 @@
         function scrollToTop() {
             window.scrollTo({ top: 0, behavior: "smooth" });
         }
+    </script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const sidebarToggle = document.querySelector(".sidebar-toggle");
+            const sidebar = document.querySelector(".sidebar");
+            const closeSidebar = document.querySelector(".close-sidebar");
+
+            sidebarToggle.addEventListener("click", function () {
+                sidebar.classList.toggle("active");
+                sidebarToggle.classList.toggle("active");
+            });
+
+            closeSidebar.addEventListener("click", function () {
+                sidebar.classList.remove("active");
+                sidebarToggle.classList.remove("active");
+            });
+        });
+
     </script>
 
 

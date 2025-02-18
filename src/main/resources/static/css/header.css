@@ -1,0 +1,314 @@
+/* -----------------------
+   HEADER & NAVBAR
+------------------------ */
+.top-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #1b2845;
+    padding: 10px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 2px solid #f8f8f8;
+    z-index: 1000;
+}
+
+/* Logo */
+.logo-container {
+
+    margin-left: 40px;
+}
+
+/* Navbar centrera länkar */
+.navbar {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.navbar ul {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.navbar ul li {
+    margin: 0 10px;
+}
+
+.navbar ul li a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    font-size: 1rem;
+    background-color: transparent;
+    padding: 8px 12px;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.navbar ul li a:hover {
+    background-color: white;
+    color: #1b2845;
+}
+
+/* Boka Bord-knappen till höger */
+.boka-bord {
+    margin-right: 30px;
+}
+
+.boka-bord a {
+    display: block;
+    padding: 8px 12px;
+    border: 2px solid white;
+    color: white;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: bold;
+    background: transparent;
+    border-radius: 5px;
+    transition: background 0.3s, color 0.3s;
+}
+
+.boka-bord a:hover {
+    background-color: white;
+    color: #1b2845;
+}
+
+/* Logotyp */
+.logo {
+    width: 80px;
+    height: auto;
+    display: block;
+    background-color: white;
+    padding: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    border: 2px solid #355628;
+}
+
+/* SIDOMENY (Sidebar) */
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: -100%; /* Göm sidomenyn */
+    width: 250px;
+    height: 100vh;
+    background-color: #1b2845;
+    transition: left 0.3s ease-in-out;
+    z-index: 1001;
+    padding-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Navigationslänkar i sidomenyn */
+.sidebar ul {
+    flex-direction: column;
+    gap: 15px;
+    padding: 20px;
+    margin: 0;
+    flex-grow: 1;
+}
+
+.sidebar ul li a {
+    color: white;
+    font-size: 1.1rem;
+    padding: 10px;
+    border-radius: 5px;
+    display: block;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.sidebar ul li a:hover {
+    background-color: white;
+    color: #1b2845;
+}
+
+/* "Boka Bord"-knapp i sidomenyn */
+.sidebar .boka-bord {
+    margin-top: auto;
+    margin-bottom: 20px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.sidebar .boka-bord a {
+    display: block;
+    padding: 8px 12px;
+    border: 2px solid white;
+    color: white;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: bold;
+    background: transparent;
+    border-radius: 5px;
+    transition: background 0.3s, color 0.3s;
+}
+
+.sidebar .boka-bord a:hover {
+    background-color: white;
+    color: #1b2845;
+}
+
+/* Kryss för att stänga sidomenyn */
+.close-sidebar {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 5px;
+}
+
+/* Visa sidomenyn när den är aktiv */
+.sidebar.active {
+    left: 0;
+}
+
+/* Hamburger-ikonen */
+.sidebar-toggle {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    z-index: 1002;
+}
+
+.hamburger {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background-color: white;
+    position: relative;
+}
+
+.hamburger::before,
+.hamburger::after {
+    content: '';
+    width: 25px;
+    height: 3px;
+    background-color: white;
+    position: absolute;
+    left: 0;
+    transition: transform 0.3s ease-in-out;
+}
+
+.hamburger::before {
+    top: -8px;
+}
+
+.hamburger::after {
+    top: 8px;
+}
+
+/* Animation för hamburger-ikonen */
+.sidebar-toggle.active .hamburger {
+    background-color: transparent;
+}
+
+.sidebar-toggle.active .hamburger::before {
+    transform: rotate(45deg);
+    top: 0;
+}
+
+.sidebar-toggle.active .hamburger::after {
+    transform: rotate(-45deg);
+    top: 0;
+}
+
+/* Dölj element på mobila enheter */
+.mobile-only {
+    display: none;
+}
+
+/* RESPONSIV DESIGN */
+@media (max-width: 1024px) {
+    .top-header {
+        padding: 10px 15px;
+    }
+
+    .logo-container {
+        width: 150px;
+        margin-left: 10px;
+    }
+
+    .logo {
+        width: 70px;
+        padding: 8px;
+    }
+
+    .navbar ul {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .navbar ul li {
+        margin: 5px;
+    }
+
+    .boka-bord {
+        margin-right: 10px;
+    }
+}
+
+@media (max-width: 768px) {
+    .sidebar-toggle {
+        display: block;
+    }
+
+    .mobile-only {
+        display: block;
+    }
+
+    .desktop-only {
+        display: none;
+    }
+
+    .desktop-nav,
+    .boka-bord.desktop-only {
+        display: none;
+    }
+
+    .sidebar {
+        width: 80%;
+        left: -100%;
+    }
+
+    .sidebar ul {
+        text-align: center;
+    }
+
+    .sidebar ul li {
+        margin-bottom: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .logo-container {
+        width: 120px;
+    }
+
+    .logo {
+        width: 60px;
+        padding: 5px;
+    }
+
+    .sidebar {
+        width: 100%;
+    }
+
+    .boka-bord a {
+        font-size: 0.9rem;
+        padding: 6px 10px;
+    }
+}
