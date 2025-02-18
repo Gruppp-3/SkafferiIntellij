@@ -101,4 +101,4 @@ INSERT INTO WORK_SHIFT (START_TIME, END_TIME, DESCRIPTION, EMPLOYEE_ID) VALUES
 -- 11. Bookings
 INSERT INTO BOOKING (NAME, EMAIL, PHONE, DATE, TIME, PEOPLE_COUNT) VALUES
                                                                        ('Alice Johnson', 'alice@example.com', '0701234567', '2025-02-18', '18:00:00', 4),
-                                                                       ('Bob Brown', 'bob@example.com', '0707654321', '2025-02-19', '19:30:00', 2);
+-

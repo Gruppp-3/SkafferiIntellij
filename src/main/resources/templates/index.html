@@ -48,7 +48,6 @@
 </header>
 
 
-<!-- Hej here comes a new update-->
 <!-- HERO SECTION -->
 <section class="hero">
     <div class="hero-img">
@@ -58,12 +57,15 @@
         <h1>Välkommen till Anton's Skafferi!</h1>
         <div class="hero-sections">
             <div class="hero-box">
-                <!-- <a href="#menu"><h3>Dagens Lunch</h3></a> -->
-                <h2>Dagens Lunch - Måndag:</h2>
-                <p><strong>Main Meal 1:</strong> Grilled Chicken with Roasted Vegetables</p>
-                <p><strong>Main Meal 2:</strong> Pasta Primavera</p>
-                <p><strong>Soup:</strong> Tomato Basil Soup</p>
-                <p><strong>Salad:</strong> Your Preference</p>
+                <h2 th:text="${'Dagens Lunch - ' + #dates.format(#dates.createNow(), 'EEEE')}">Dagens Lunch - Måndag:</h2>
+                <div th:each="item, itemStat : ${todayLunch}">
+                    <p>
+                        <strong th:text="${itemStat.index == 0 ? 'Main Meal 1: ' :
+                                         itemStat.index == 1 ? 'Main Meal 2: ' :
+                                         itemStat.index == 2 ? 'Soup: ' : 'Additional Dish: '}">Main Meal 1:</strong>
+                        <span th:text="${item.dish_name}">Dish Name</span>
+                    </p>
+                </div>
             </div>
         </div>
     </div>
@@ -74,14 +76,15 @@
     <h2>Veckans Lunch – Antons Skafferi</h2>
     <p class="menu-info">Lunch serveras alla dagar mellan 11:00 och 14:00.</p>
     <div class="menu-container">
-
+        <!-- Using hardcoded days but dynamic content -->
         <!-- Måndag -->
         <div class="day">
             <h3>Måndag</h3>
             <ul>
-                <li><strong>Kycklingfilé med ugnsrostade grönsaker</strong><br>Serveras med örtig vitlökssås och ris.</li>
-                <li><strong>Vegetarisk lasagne</strong><br>Gjord på linser, zucchini och morot.</li>
-                <li><strong>Svampsoppa</strong><br>Krämig soppa med smak av skogschampinjoner.</li>
+                <li th:each="item : ${weeklyLunchMenu.get('Måndag')}">
+                    <strong th:text="${item.dish_name}">Dish Name</strong>
+                    <span> Veckans lunch</span>
+                </li>
             </ul>
         </div>
 
@@ -89,20 +92,21 @@
         <div class="day">
             <h3>Tisdag</h3>
             <ul>
-                <li><strong>Pannbiff med löksås</strong><br>Serveras med kokt potatis och lingonsylt.</li>
-                <li><strong>Falukorv i ugn med tomat och ost</strong><br>Serveras med potatismos.</li>
-                <li><strong>Halloumigryta</strong><br>En smakrik gryta med ris och färska grönsaker.</li>
+                <li th:each="item : ${weeklyLunchMenu.get('Tisdag')}">
+                    <strong th:text="${item.dish_name}">Dish Name</strong>
+                    <span> Veckans lunch</span>
+                </li>
             </ul>
         </div>
-
 
         <!-- Onsdag -->
         <div class="day">
             <h3>Onsdag</h3>
             <ul>
-                <li><strong>Torskrygg med citronsås</strong><br>Serveras med potatispuré och haricots verts.</li>
-                <li><strong>Pasta Carbonara</strong><br>Klassisk krämig pasta med bacon och parmesan.</li>
-                <li><strong>Vegetarisk currygryta</strong><br>Kryddig gryta med kokosmjölk, kikärtor och grönsaker.</li>
+                <li th:each="item : ${weeklyLunchMenu.get('Onsdag')}">
+                    <strong th:text="${item.dish_name}">Dish Name</strong>
+                    <span> Veckans lunch</span>
+                </li>
             </ul>
         </div>
 
@@ -110,9 +114,10 @@
         <div class="day">
             <h3>Torsdag</h3>
             <ul>
-                <li><strong>Stekt med raggmunk</strong><br>Serveras med rårörda lingon.</li>
-                <li><strong>Kycklinggryta med dragon</strong><br>Serveras med jasminris.</li>
-                <li><strong>Vegetarisk böngryta</strong><br>En mustig gryta med tomatsås och bröd vid sidan.</li>
+                <li th:each="item : ${weeklyLunchMenu.get('Torsdag')}">
+                    <strong th:text="${item.dish_name}">Dish Name</strong>
+                    <span> Veckans lunch</span>
+                </li>
             </ul>
         </div>
 
@@ -120,9 +125,10 @@
         <div class="day">
             <h3>Fredag</h3>
             <ul>
-                <li><strong>Grillad lax med hollandaise</strong><br>Serveras med sparris och pressad potatis.</li>
-                <li><strong>Pasta Carbonara</strong><br>Klassisk krämig pasta med bacon och parmesan.</li>
-                <li><strong>Vegetarisk currygryta</strong><br>Kryddig gryta med kokosmjölk, kikärtor och grönsaker.</li>
+                <li th:each="item : ${weeklyLunchMenu.get('Fredag')}">
+                    <strong th:text="${item.dish_name}">Dish Name</strong>
+                    <span> Veckans lunch</span>
+                </li>
             </ul>
         </div>
 
@@ -130,9 +136,10 @@
         <div class="day">
             <h3>Lördag</h3>
             <ul>
-                <li><strong>Torskrygg med citronsås</strong><br>Serveras med potatispuré och haricots verts.</li>
-                <li><strong>Pasta Carbonara</strong><br>Klassisk krämig pasta med bacon och parmesan.</li>
-                <li><strong>Vegetarisk currygryta</strong><br>Kryddig gryta med kokosmjölk, kikärtor och grönsaker.</li>
+                <li th:each="item : ${weeklyLunchMenu.get('Lördag')}">
+                    <strong th:text="${item.dish_name}">Dish Name</strong>
+                    <span> Veckans lunch</span>
+                </li>
             </ul>
         </div>
 
@@ -140,12 +147,12 @@
         <div class="day">
             <h3>Söndag</h3>
             <ul>
-                <li><strong>Pannbiff med löksås</strong><br>Serveras med kokt potatis och lingonsylt.</li>
-                <li><strong>Pasta Carbonara</strong><br>Klassisk krämig pasta med bacon och parmesan.</li>
-                <li><strong>Halloumigryta</strong><br>En smakrik gryta med ris och färska grönsaker.</li>
+                <li th:each="item : ${weeklyLunchMenu.get('Söndag')}">
+                    <strong th:text="${item.dish_name}">Dish Name</strong>
+                    <span> Veckans lunch</span>
+                </li>
             </ul>
         </div>
-
     </div>
 </section>
 
