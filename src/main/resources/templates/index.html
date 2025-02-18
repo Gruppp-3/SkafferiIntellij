@@ -1,24 +1,44 @@
 <!DOCTYPE html>
-<html lang="sv" xmlns:th="http://www.thymeleaf.org">
+<html lang="sv">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
     <title>Antons Skafferi</title>
     <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/alacarte.css" />
+    <link rel="stylesheet" href="/css/book.css" />
+    <link rel="stylesheet" href="/css/event.css" />
+    <link rel="stylesheet" href="/css/footer.css" />
+    <link rel="stylesheet" href="/css/menu.css" />
+    <link rel="stylesheet" href="/css/VeckansMeny.css" />
+    <link rel="stylesheet" href="/css/about.css" />
+
+
 </head>
 <body>
 
-<!-- HEADER -->
+<!-- HEADER (Combine Logo + Nav) -->
 <header class="top-header">
     <div class="logo-container">
-        <img src="/images/logo1.png" alt="Antons Skafferi" class="logo">
+        <a href="index.html">
+            <img src="/images/logo1.png" alt="Antons Skafferi" class="logo">
+        </a>
     </div>
+
 
     <nav class="navbar">
         <ul>
             <li><a href="#">HEM</a></li>
-            <li><a href="#menu">MENY</a></li>
+            <li><a href="#meno">MENU</a></li>
+            <li><a href="#alacarte">A La Carte</a></li>
+            <li><a href="#events">Evenemang</a></li>
             <li><a href="#om-oss">OM OSS</a></li>
+
         </ul>
     </nav>
 
@@ -28,18 +48,104 @@
 </header>
 
 
+<!-- Hej here comes a new update-->
 <!-- HERO SECTION -->
 <section class="hero">
     <div class="hero-img">
         <img src="/images/home.png" alt="Antons Skafferi">
     </div>
     <div class="hero-content">
-        <h1>Välkommen till Anton's Skafferi</h1>
+        <h1>Välkommen till Anton's Skafferi!</h1>
         <div class="hero-sections">
             <div class="hero-box">
-                <a href="#menu"><h2>Meny</h2></a>
+                <!-- <a href="#menu"><h3>Dagens Lunch</h3></a> -->
+                <h2>Dagens Lunch - Måndag:</h2>
+                <p><strong>Main Meal 1:</strong> Grilled Chicken with Roasted Vegetables</p>
+                <p><strong>Main Meal 2:</strong> Pasta Primavera</p>
+                <p><strong>Soup:</strong> Tomato Basil Soup</p>
+                <p><strong>Salad:</strong> Your Preference</p>
             </div>
         </div>
+    </div>
+</section>
+
+<!-- WEEKLY MENU SECTION -->
+<section id="meno" class="weekly-menu">
+    <h2>Veckans Lunch – Antons Skafferi</h2>
+    <p class="menu-info">Lunch serveras alla dagar mellan 11:00 och 14:00.</p>
+    <div class="menu-container">
+
+        <!-- Måndag -->
+        <div class="day">
+            <h3>Måndag</h3>
+            <ul>
+                <li><strong>Kycklingfilé med ugnsrostade grönsaker</strong><br>Serveras med örtig vitlökssås och ris.</li>
+                <li><strong>Vegetarisk lasagne</strong><br>Gjord på linser, zucchini och morot.</li>
+                <li><strong>Svampsoppa</strong><br>Krämig soppa med smak av skogschampinjoner.</li>
+            </ul>
+        </div>
+
+        <!-- Tisdag -->
+        <div class="day">
+            <h3>Tisdag</h3>
+            <ul>
+                <li><strong>Pannbiff med löksås</strong><br>Serveras med kokt potatis och lingonsylt.</li>
+                <li><strong>Falukorv i ugn med tomat och ost</strong><br>Serveras med potatismos.</li>
+                <li><strong>Halloumigryta</strong><br>En smakrik gryta med ris och färska grönsaker.</li>
+            </ul>
+        </div>
+
+
+        <!-- Onsdag -->
+        <div class="day">
+            <h3>Onsdag</h3>
+            <ul>
+                <li><strong>Torskrygg med citronsås</strong><br>Serveras med potatispuré och haricots verts.</li>
+                <li><strong>Pasta Carbonara</strong><br>Klassisk krämig pasta med bacon och parmesan.</li>
+                <li><strong>Vegetarisk currygryta</strong><br>Kryddig gryta med kokosmjölk, kikärtor och grönsaker.</li>
+            </ul>
+        </div>
+
+        <!-- Torsdag -->
+        <div class="day">
+            <h3>Torsdag</h3>
+            <ul>
+                <li><strong>Stekt med raggmunk</strong><br>Serveras med rårörda lingon.</li>
+                <li><strong>Kycklinggryta med dragon</strong><br>Serveras med jasminris.</li>
+                <li><strong>Vegetarisk böngryta</strong><br>En mustig gryta med tomatsås och bröd vid sidan.</li>
+            </ul>
+        </div>
+
+        <!-- Fredag -->
+        <div class="day">
+            <h3>Fredag</h3>
+            <ul>
+                <li><strong>Grillad lax med hollandaise</strong><br>Serveras med sparris och pressad potatis.</li>
+                <li><strong>Pasta Carbonara</strong><br>Klassisk krämig pasta med bacon och parmesan.</li>
+                <li><strong>Vegetarisk currygryta</strong><br>Kryddig gryta med kokosmjölk, kikärtor och grönsaker.</li>
+            </ul>
+        </div>
+
+        <!-- Lördag -->
+        <div class="day">
+            <h3>Lördag</h3>
+            <ul>
+                <li><strong>Torskrygg med citronsås</strong><br>Serveras med potatispuré och haricots verts.</li>
+                <li><strong>Pasta Carbonara</strong><br>Klassisk krämig pasta med bacon och parmesan.</li>
+                <li><strong>Vegetarisk currygryta</strong><br>Kryddig gryta med kokosmjölk, kikärtor och grönsaker.</li>
+            </ul>
+        </div>
+
+        <!-- Söndag -->
+        <div class="day">
+            <h3>Söndag</h3>
+            <ul>
+                <li><strong>Pannbiff med löksås</strong><br>Serveras med kokt potatis och lingonsylt.</li>
+                <li><strong>Pasta Carbonara</strong><br>Klassisk krämig pasta med bacon och parmesan.</li>
+                <li><strong>Halloumigryta</strong><br>En smakrik gryta med ris och färska grönsaker.</li>
+            </ul>
+        </div>
+
     </div>
 </section>
 
@@ -61,38 +167,203 @@
         </div>
     </div>
 </section>
+<section id="boka-bord" class="booking-section">
+    <h2>Boka Bord</h2>
 
-<!-- FOOTER -->
+    <div class="booking-container">
+        <!-- Left Column: Date + Times -->
+        <div class="date-time-panel">
+            <div class="date-picker">
+                <h3>Välj ett datum</h3>
+                <input type="date" id="datum" required />
+            </div>
+
+            <div class="time-picker">
+                <h3>Tillgängliga tider</h3>
+                <div class="time-grid">
+                    <button class="time-btn">09:00</button>
+                    <button class="time-btn">09:30</button>
+                    <button class="time-btn">10:00</button>
+                    <button class="time-btn">10:30</button>
+                    <button class="time-btn">11:00</button>
+                    <button class="time-btn">11:30</button>
+                    <button class="time-btn">12:00</button>
+                    <button class="time-btn">12:30</button>
+                    <button class="time-btn">13:00</button>
+                    <button class="time-btn">13:30</button>
+                    <button class="time-btn">14:00</button>
+                    <button class="time-btn">14:30</button>
+                    <button class="time-btn">15:00</button>
+                    <button class="time-btn">15:30</button>
+                    <button class="time-btn">16:00</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Column: Booking Form -->
+        <form class="booking-form">
+            <h3>Fyll i dina uppgifter</h3>
+
+
+            <label for="namn">Namn</label>
+            <input type="text" id="namn" placeholder="Ditt Namn" required />
+
+            <label for="email">E-post</label>
+            <input type="email" id="email" placeholder="Din e-post" required />
+
+            <label for="telefon">Telefonnummer</label>
+            <input type="tel" id="telefon" placeholder="Ditt telefonnummer" required />
+
+            <label for="antal">Antal gäster</label>
+            <select id="antal" required>
+                <option value="1">1 person</option>
+                <option value="2">2 personer</option>
+                <option value="3">3 personer</option>
+                <option value="4">4 personer</option>
+                <option value="5">5 personer</option>
+                <option value="6">6 personer</option>
+
+            </select>
+
+            <button type="submit">Boka nu</button>
+        </form>
+    </div>
+</section>
+
+<!-- EVENEMANG SECTION -->
+<section id="events" class="upcoming-events">
+    <h2>KOMMANDE EVENEMANG</h2>
+
+    <div class="events-row">
+        <!-- EVENT 1 -->
+        <div class="event-item">
+            <img src="/images/event1.jpg" alt="Rockkväll Trubadur" />
+            <h3>Rockkväll Trubadur</h3>
+            <p>
+                <span class="event-text"><i class="fas fa-calendar-alt"></i> 20 maj 2025</span><br>
+                <span class="event-text"><i class="fas fa-clock"></i> 21.00</span><br>
+                <span class="event-text"><i class="fas fa-map-marker-alt"></i> Göteborg Arena</span>
+            </p>
+            <a href="event1.html" class="read-more"><i class="fas fa-arrow-right"></i> Läs mer</a>
+        </div>
+
+        <!-- EVENT 2 -->
+        <div class="event-item">
+            <img src="/images/event2.jpg" alt="Rockkväll Trubadur" />
+            <h3>Rockkväll Trubadur</h3>
+            <p>
+                <span class="event-text"><i class="fas fa-calendar-alt"></i> 22 juni 2025</span><br>
+                <span class="event-text"><i class="fas fa-clock"></i> 20.00</span><br>
+                <span class="event-text"><i class="fas fa-map-marker-alt"></i> Malmö Arena</span>
+            </p>
+            <a href="event2.html" class="read-more"><i class="fas fa-arrow-right"></i> Läs mer</a>
+        </div>
+
+        <!-- EVENT 3 -->
+        <div class="event-item">
+            <img src="/images/event3.jpg" alt="Rockkväll Trubadur" />
+            <h3>Rockkväll Trubadur</h3>
+            <p>
+                <span class="event-text"><i class="fas fa-calendar-alt"></i> 15 juli 2025</span><br>
+                <span class="event-text"><i class="fas fa-clock"></i> 22.00</span><br>
+                <span class="event-text"><i class="fas fa-map-marker-alt"></i> Stockholm Arena</span>
+            </p>
+            <a href="event3.html" class="read-more"><i class="fas fa-arrow-right"></i> Läs mer</a>
+        </div>
+    </div>
+</section>
+
+
+<section id="om-oss" class="about-section">
+    <h2>OM OSS</h2>
+    <div class="about-content">
+        <!-- LEFT COLUMN: Text -->
+        <div class="about-text">
+            <p>
+                På Antons Skafferi brinner vi för att skapa minnesvärda matupplevelser i en varm och inbjudande miljö.
+                Med rötterna i traditionell matkultur och en passion för nyskapande smaker, erbjuder vi en meny fylld av
+                omsorgsfullt tillagade rätter gjorda på noggrant utvalda råvaror.
+            </p>
+            <p>
+                IOavsett om du besöker oss för en avkopplande lunch, en smakrik middag eller ett festligt evenemang,
+                kan du förvänta dig mat av högsta kvalitet och en service som får dig att känna dig som hemma.<br><br>
+
+                Vi ser fram emot att välkomna dig till Antons Skafferi – där varje måltid är en upplevelse!
+
+            </p>
+        </div>
+
+        <!-- RIGHT COLUMN: Image -->
+        <div class="about-image">
+
+            <img src="/images/omOss.jpg"alt="Restaurangbild" />
+        </div>
+    </div>
+</section>
+
+
+<!-- Footer -->
 <footer class="site-footer">
     <div class="footer-container">
+        <!-- Kontaktinfo -->
         <div class="footer-column">
-            <h3>Antons Skafferi</h3>
-            <p>Skafferigatan 12</p>
-            <p><a href="mailto:antonsskafferi@boka.se">antonsskafferi@boka.se</a></p>
-            <p>060-12345</p>
+            <h3>Kontakt</h3>
+            <p>Dalgatan 23B, 852 30 Sundsvall</p>
+            <p>060-00 00 00</p>
+            <p><a href="mailto:bokabord@antanskafferi.se">bokabord@antanskafferi.se</a></p>
         </div>
 
-        <div class="footer-column">
-            <h3>Snabblänkar</h3>
-            <ul>
-                <li><a href="#">HEM</a></li>
-                <li><a href="#menu">MENY</a></li>
-                <li><a href="#om-oss">OM OSS</a></li>
-            </ul>
+        <!-- Knappmeny -->
+        <div class="footer-column footer-buttons">
+            <a href="#meno">Se meny</a>
+            <a href="#">Ladda ner meny</a>
+            <a href="#boka-bord">Boka bord</a>
         </div>
 
-        <div class="footer-column social-column">
-            <h3>Följ oss</h3>
-            <div class="social-icons">
-                <a href="#" aria-label="Facebook">FB</a>
-                <a href="#" aria-label="Instagram">IG</a>
-            </div>
+        <!-- Öppettider -->
+        <div class="footer-column">
+            <h3>Öppettider</h3>
+            <p><strong>Lunchöppet:</strong><br> Mån-fre 11:00 - 14:00</p>
+            <p><strong>Middagsöppet:</strong><br> Mån-tor 17:00 - 22:00</p>
+            <p>Fre 17:00 - 03:00</p>
+            <p>Lör 17:00 - 03:00</p>
+            <p>Sön 17:00 - 00:00</p>
         </div>
     </div>
 
+    <!-- Copyright -->
     <div class="footer-bottom">
         <p>&copy; 2025 Antons Skafferi. All Rights Reserved.</p>
     </div>
+
+
+    <!-- Tillbaka upp-knapp -->
+    <button id="scrollToTopBtn" onclick="scrollToTop()">
+        <span class="material-icons">arrow_upward</span>
+    </button>
+
+
+    <script>
+        window.onscroll = function() { scrollFunction(); };
+
+        function scrollFunction() {
+            let scrollBtn = document.getElementById("scrollToTopBtn");
+
+            // Visa knappen om man scrollar ner mer än 300px
+            if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+                scrollBtn.classList.add("show");
+            } else {
+                scrollBtn.classList.remove("show");
+            }
+        }
+
+        // Funktion för att scrolla upp
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        }
+    </script>
+
+
 </footer>
 
 </body>

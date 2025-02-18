@@ -1,43 +1,31 @@
 /* -----------------------
-   GLOBAL STYLING
------------------------- */
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background-color: #ffffff;
-    color: #333;
-    padding-top: 60px;
-}
-
-
-/* -----------------------
    HEADER & NAVBAR
 ------------------------ */
-/* Top header container (with logo) */
 .top-header {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    background-color: #8DCB8E;
+    background-color: #1b2845;
     padding: 10px 0;
     display: flex;
     align-items: center;
     justify-content: space-between;
     border-bottom: 2px solid #f8f8f8;
     z-index: 1000;
+
 }
 
-/* Logo behåller sin position */
+/* Logo */
 .logo-container {
-    width: 250px;
-    height: 100px;
+    width: 200px;
+    height: 80px;
     display: flex;
     align-items: center;
     margin-left: 20px;
 }
 
-/* Navbar flexbox för att centrera länkar */
+/* Navbar centrera länkar */
 .navbar {
     flex-grow: 1;
     display: flex;
@@ -51,39 +39,48 @@ body {
 }
 
 .navbar ul li {
-    margin: 0 20px;
+    margin: 0 10px;
 }
 
 .navbar ul li a {
     text-decoration: none;
-    color: #8DCB8E;
+    color: white;
     font-weight: bold;
-    font-size: 1.2rem;
+    font-size: 1rem;
+    background-color: transparent;
+    padding: 2px 4px;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
 }
 
-/* Boka bord till höger */
+.navbar ul li a:hover {
+    background-color: white;
+    color: #1b2845;
+}
+
+
+/* Boka Bord-knappen till höger */
 .boka-bord {
     margin-right: 30px;
 }
 
 .boka-bord a {
-    font-size: 1.4rem;
-    font-weight: bold;
-    color: #8DCB8E;
+    display: block;
+    padding: 8px 12px;
+    border: 2px solid white;
+    color: white;
     text-decoration: none;
-    background: white;
-    padding: 10px 20px;
+    font-size: 1rem;
+    font-weight: bold;
+    background: transparent;
     border-radius: 5px;
     transition: background 0.3s, color 0.3s;
 }
 
-/* Hover-effekt: Ändra bakgrund till grön och text till vit */
 .boka-bord a:hover {
-    background: #8DCB8E;
-    color: white;
+    background-color: white;
+    color: #1b2845;
 }
-
-
 
 
 
@@ -91,7 +88,7 @@ body {
     position: absolute;
     top: 3px;
     left: 50px;
-    width: 70px;
+    width: 50px;
     height: auto;
     display: block;
     margin: 10px;
@@ -99,12 +96,11 @@ body {
     padding: 10px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
     border-radius: 10px;
-
-}
+    border: 2px solid #355628;}
 
 /* Navbar */
 .navbar {
-    background-color: #8DCB8E;
+    background-color: #1b2845;
     padding: 10px 0;
 }
 
@@ -123,25 +119,40 @@ body {
 .navbar a {
     text-decoration: none;
     font-weight: bold;
-    color: #8DCB8E;
+    color: #1b2845;
     background-color: white;
     padding: 5px 10px;
-    border: 2px solid #8DCB8E;
+    border: 2px solid #1b2845;
     border-radius: 5px;
     transition: background-color 0.3s, color 0.3s;
 }
 
+/* Knappstil */
+.navbar a  {
+    display: block;
+    margin: 10px auto;
+    padding: 10px 15px;
+    border: 2px solid #355628;
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    width: 200px;
+    text-align: center;
+}
+
 .navbar a:hover {
-    background-color: #8DCB8E;
+    background-color: #1b2845;
     color: white;
 }
+
+
+
+
 
 
 /* -----------------------
    HERO SECTION
 ------------------------ */
-/* HERO SECTION */
-/* HERO SECTION */
 .hero {
     position: relative;
     text-align: center;
@@ -173,412 +184,95 @@ body {
     max-width: 600px;
 }
 
+/* Innehållet över bakgrunden */
+.hero-content h1{
+    text-align: center;
+    font-size: 35px;
+    font-weight: bold;
+
+}
+
 /* Box med alla länkar */
 .hero-box {
-    background: rgba(255, 255, 255, 0.1);
-    padding: 20px;
     border-radius: 10px;
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(5px);
     width: 100%;
+    display: block;
+    margin: 10px auto;
+    padding: 10px 15px;
+    border: 2px solid #355628;
+    color: white;
+
 }
 
 /* (titlarna) */
 .hero-box a {
     text-decoration: none;
     color: white;
-    font-weight: bold;
     display: block;
     margin: 10px 0;
-}
 
-.hero-box h2 {
-    font-size: 1.8rem;
-    transition: color 0.3s ease;
-}
-
-.hero-content h1 {
-    font-size: 2.2rem;
-    transition: color 0.3s ease;
 }
 
 
-.hero-box a:hover h2 {
-    color: #8DCB8E;
-}
-
-
-
-
-/* -----------------------
-   SIMPLE “MENU” SECTION
------------------------- */
-.menu {
-    background-color: #ffffff;
-    padding: 3rem 2rem;
-    text-align: center;
-    min-height: auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
-.menu-content {
-    background: #8DCB8E;
-    padding: 40px;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
-    max-width: 800px;
-    width: 100%;
-
-
-
-    text-align: center;
-    min-height: 90vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
-/* Titel */
-.menu-content h2 {
-    color: #ffffff;
-    font-size: 2rem;
-    margin-bottom: 20px;
-}
-
-/* Stycke */
-.menu-content p {
-    margin: 10px 0;
-    font-size: 1.2rem;
-}
-
-/* Knapp */
-.menu-content button {
-    background-color: #ffffff;
-    color: #12E0E0;
-    border: none;
-    padding: 12px 24px;
-    font-size: 1.1rem;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-top: 20px;
-    transition: background-color 0.3s;
-    font-weight: bold;
-}
-
-.menu-content button:hover {
-    background-color: #6FAA6E;
-}
-
-
-/* -----------------------
-   WEEKLY MENU SECTION
------------------------- */
-.weekly-menu {
-    text-align: center;
-    background-color: #dcf5d6;
-    padding: 40px 20px;
-}
-
-/* Huvudrubrik */
-.weekly-menu h2 {
-    color: #2E7D32;
-    font-size: 2rem;
-    font-weight: bold;
-    margin-bottom: 15px;
-}
-
-/* Info-text */
-.menu-info {
-    font-size: 1.2rem;
-    color: #444;
-    margin-bottom: 20px;
-}
-
-/* Grid-layout för dagarna (3+2 upplägg) */
-.menu-container {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-    max-width: 800px;
-    margin: auto;
-    justify-content: center;
-}
-
-/* Sista två korten tar upp två kolumner */
-.menu-container .day:nth-child(4),
-.menu-container .day:nth-child(5) {
-    grid-column: span 1;
-}
-
-/* Dag-kort styling */
-.day {
-    background-color: #fdf8f2;
-    padding: 15px;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    text-align: left;
-    border-left: 4px solid #4CAF50;
-    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-}
-
-.day:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
-}
-
-/* Dag-rubriker */
-.day h3 {
-    text-align: center;
-    color: #2E7D32;
-    font-size: 1.2rem;
-    font-weight: bold;
-}
-
-/* Listor */
-.day ul {
-    list-style-type: none;
-    padding: 0;
-    margin-top: 10px;
-}
-
-/* Meny-punkter */
-.day li {
-    margin: 8px 0;
-    font-size: 1rem;
-    color: #333;
-}
-
-/* Namn på rätter */
-.day li strong {
-    color: #2E7D32;
-}
-
-/* Responsiv design för mindre skärmar */
-@media (max-width: 768px) {
-    .menu-container {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-@media (max-width: 500px) {
-    .menu-container {
-        grid-template-columns: 1fr;
-    }
-}
-
-
-
-/* ABOUT SECTION */
-.about-section {
-    background-color: #fefaf5;
-    padding: 3rem 2rem;
-    text-align: center;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
-/* Centrerad titel */
-.about-section h2 {
-    font-size: 2.5rem;
+.hero-box a:hover h3 {
     color: #355628;
-    margin-bottom: 2rem;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    text-align: center;
 }
 
-/* Innehållet: Text och Bild bredvid varandra */
-.about-content {
-    display: flex;
-    max-width: 1200px;
-    width: 100%;
-    gap: 2rem;
+
+/* Scrolla upp-knapp */
+#scrollToTopBtn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    background-color: #fff;
+    color: #1b2845;
+    border: none;
+    border-radius: 50%;
+    font-size: 1.5rem;
+    display: none;
+    justify-content: center;
     align-items: center;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    transition: opacity 0.3s, transform 0.3s;
 }
 
-/* Text på vänster sida */
-.about-text {
-    flex: 1;
-    text-align: left;
-    line-height: 1.6;
-    color: #333;
-    max-width: 600px;
+/* Hover-effekt */
+#scrollToTopBtn:hover {
+    background-color: #355628;
 }
 
-/* Bild på höger sida */
-.about-image {
-    flex: 1;
+/* När knappen är synlig */
+#scrollToTopBtn.show {
     display: flex;
-    justify-content: flex-end;
+    opacity: 1;
+    transform: translateY(0);
 }
 
-.about-image img {
-    width: 100%;
-    max-width: 500px;
-    height: auto;
-    border-radius: 6px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-}
 
-/* RESPONSIV DESIGN */
-@media (max-width: 800px) {
-    .about-content {
+
+/* -----------------------
+   RESPONSIVE DESIGN
+------------------------ */
+
+
+/* Responsiv design för mobila enheter */
+@media (max-width: 768px) {
+    .top-header {
         flex-direction: column;
         text-align: center;
+        padding: 10px;
     }
 
-    .about-image {
-        justify-content: center;
+    .navbar ul {
+        flex-direction: column;
+        gap: 10px;
     }
 
-    .about-text {
-        text-align: center;
+    .boka-bord a {
+        margin-top: 15px;
     }
-}
-
-
-
-
-/* FOOTER STYLING */
-.site-footer {
-    background-color: #4D2C20;
-    color: #fefaf5;
-    padding: 1.5rem 1rem 0.8rem;
-    font-size: 0.85rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-}
-
-/* Container med kolumner */
-.footer-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 1.5rem;
-    max-width: 1000px;
-    flex-grow: 1;
-}
-
-/* Footer-kolumner */
-.footer-column h3 {
-    font-size: 1rem;
-    margin-bottom: 0.8rem;
-    color: #fff;
-}
-
-.footer-column p,
-.footer-column li {
-    margin-bottom: 0.4rem;
-    line-height: 1.3;
-    font-size: 0.85rem;
-}
-
-/* Länkar */
-.footer-column a {
-    color: #fefaf5;
-    text-decoration: none;
-    transition: color 0.2s ease;
-}
-
-.footer-column a:hover {
-    color: #d1c0bb;
-}
-
-/* Lista utan punkter */
-.footer-column ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-/* Sociala ikoner */
-.social-column .social-icons {
-    display: flex;
-    gap: 0.8rem;
-    align-items: center;
-
-}
-
-/* Sociala ikoner */
-.social-icons a{
-    width: auto;
-    hight: auto;
-}
-
-/* FOOTER IMAGE */
-.footer-image {
-    max-height: 80px;
-    width: auto;
-    margin-left: auto;
-}
-
-/* Footer-bottom (copyright, etc.) */
-.footer-bottom {
-    text-align: center;
-    border-top: 1px solid #c9b6af;
-    padding-top: 0.8rem;
-    font-size: 0.75rem;
-    color: #fefaf5;
-    width: 100%;
-}
-
-/* Databasmeny */
-.database-menu {
-    padding: 40px 20px;
-    background-color: #fdf8f2;
-}
-
-.database-menu .category {
-    background-color: #fff;
-    margin-bottom: 30px;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-}
-
-.database-menu .category-title {
-    color: #2E7D32;
-    font-size: 1.8rem;
-    margin-bottom: 20px;
-    padding-bottom: 10px;
-    border-bottom: 2px solid #8DCB8E;
-}
-
-.database-menu .menu-item {
-    margin-bottom: 20px;
-    padding: 15px;
-    background-color: #fefaf5;
-    border-radius: 4px;
-}
-
-.database-menu .item-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 10px;
-}
-
-.database-menu .item-name {
-    font-weight: bold;
-    font-size: 1.2rem;
-    color: #333;
-}
-
-.database-menu .item-price {
-    font-weight: bold;
-    color: #2E7D32;
-}
-
-.database-menu .item-description {
-    color: #666;
-    font-size: 1rem;
-    line-height: 1.4;
 }

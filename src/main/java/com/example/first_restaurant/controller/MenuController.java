@@ -18,17 +18,24 @@ public class MenuController {
 
     @GetMapping("/")
     public String showMenu(Model model) {
+        // Get à la carte menu
         List<Map<String, Object>> menuItems = dishService.getMenuByCategory();
-
-        // Organize menu items by category
         Map<String, List<Map<String, Object>>> categorizedMenu = new HashMap<>();
 
         for (Map<String, Object> item : menuItems) {
             String category = (String) item.get("DISH_TYPE_NAME");
             categorizedMenu.computeIfAbsent(category, k -> new ArrayList<>()).add(item);
         }
-
         model.addAttribute("categorizedMenu", categorizedMenu);
+
+        // Get today's lunch menu
+        List<Map<String, Object>> todayLunch = dishService.getTodayLunch();
+        model.addAttribute("todayLunch", todayLunch);
+
+        // Get weekly lunch menu
+        Map<String, List<Map<String, Object>>> weeklyLunchMenu = dishService.getWeeklyLunchMenu();
+        model.addAttribute("weeklyLunchMenu", weeklyLunchMenu);
+
         return "index";
     }
 }

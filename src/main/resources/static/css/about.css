@@ -1,0 +1,86 @@
+/* ABOUT SECTION */
+.about-section {
+    background-color: #1b2845;
+    color: #fff; /* Vit text */
+    padding: 3rem 2rem;
+    text-align: center;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 5px solid #355628;
+    border-radius: 0px;
+}
+
+
+
+/* Centrerad titel */
+.about-section h2 {
+    font-size: 3rem;
+    color: #fff;
+    margin-bottom: 2rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: bold;
+    text-align: center;
+}
+
+/* Innehållet: Text och Bild bredvid varandra */
+.about-content {
+    display: flex;
+    max-width: 1200px;
+    width: 100%;
+    gap: 3rem;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Text på vänster sida */
+.about-text {
+    flex: 1;
+    text-align: left;
+    line-height: 1.8;
+    color: #fff;
+    max-width: 650px;
+    font-size: 1.1rem;
+    padding: 0 1rem;
+}
+
+/* Bild på höger sida */
+.about-image {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.about-image img {
+    width: 100%;
+    max-width: 600px;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+/* Hover-effekt på bilden */
+.about-image img:hover {
+    transform: scale(1.05);
+}
+
+/* RESPONSIV DESIGN */
+@media (max-width: 800px) {
+    .about-content {
+        flex-direction: column;
+        text-align: center;
+        gap: 1.5rem;
+    }
+
+    .about-image {
+        justify-content: center;
+    }
+
+    .about-text {
+        text-align: center;
+    }
+}

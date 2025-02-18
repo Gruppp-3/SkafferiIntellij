@@ -1,0 +1,49 @@
+/* -----------------------
+   SIMPLE “MENU” SECTION
+------------------------ */
+.menu {
+    background-color: #ffffff;
+    height: 100vh;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 40px 20px;
+    border-radius: 10px;
+
+}
+
+
+/* Innehållsrutan */
+.menu-content {
+    background: #1b2845;
+    padding: 80px;
+    border-radius: 15px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.6); /
+    backdrop-filter: blur(20px);
+    max-width: 80%;
+    width: 80%;
+    min-height: 600px;
+    margin: auto;
+
+    /* Centrera innehåll */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Titel */
+.menu-content h2 {
+    color: #ffffff;
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+
+/* Stycke */
+.menu-content p {
+    margin: 15px 0;
+    font-size: 1.3rem;
+    max-width: 80%;
+}

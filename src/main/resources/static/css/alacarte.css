@@ -1,26 +1,33 @@
 /* A LA CARTE SECTION STYLES */
 .a-la-carte {
-    background-color: #fdf9f3;
+    background-color: #ffffff ;
     padding: 4rem 1.5rem;
     text-align: center;
+    border-radius: 10px;
+
 }
 
 /* Main section heading */
 .a-la-carte > h2 {
     font-size: 2.2rem;
-    color: #2c4b34;
+    color: #1B2845;
     margin-bottom: 2rem;
     text-transform: uppercase;
     letter-spacing: 1px;
     font-weight: bold;
+    padding: 3rem 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 /* Columns container - 2x2 grid */
 .menu-columns {
     display: grid;
-    grid-template-columns: repeat(2, 1fr); /* Två kolumner per rad */
+    grid-template-columns: repeat(2, 1fr);
     gap: 2rem;
-    max-width: 900px;
+    max-width: 1200px;
     margin: 0 auto;
 }
 
@@ -30,8 +37,9 @@
     border-radius: 8px;
     padding: 1.5rem;
     box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    text-align: left;
     transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    border-top: 1px solid #355628;
+    border-left: 1px solid #355628;
 }
 
 .menu-columns .column:hover {
@@ -42,12 +50,13 @@
 /* Subheading inside each column */
 .menu-columns .column h3 {
     font-size: 1.2rem;
-    color: #2c4b34;
+    color: #1B2845;
     margin-bottom: 1rem;
-    border-bottom: 2px solid #2c4b34;
+    border-bottom: 2px solid #1B2845;
     padding-bottom: 0.5rem;
     font-weight: bold;
     text-transform: uppercase;
+
 }
 
 /* Lists styling */
@@ -55,6 +64,9 @@
     list-style: none;
     padding: 0;
     margin: 0;
+
+
+
 }
 
 /* Each menu item */
@@ -65,31 +77,34 @@
     display: flex;
     align-items: center;
     gap: 10px;
-    color: #444;
+    color: #1B2845;
     transition: color 0.2s ease-in-out;
+
 }
 
 .menu-columns .column li:hover {
-    color: #2c4b34;
+    color: #1B2845;
 }
 
 /* The <strong> text for dish names */
 .menu-columns .column li strong {
     display: block;
-    color: #2c4b34;
+    color: #1B2845;
     font-weight: bold;
     font-size: 1.05rem;
+
 }
+
 
 /* Small icon before each dish */
 .menu-columns .column li::before {
     font-size: 1.1rem;
-    color: #2c4b34;
+    color: #1B2845;
 }
 
 /* Responsiv design - Anpassar sig för små skärmar */
 @media (max-width: 768px) {
     .menu-columns {
-        grid-template-columns: 1fr; /* En kolumn per rad på små skärmar */
+        grid-template-columns: 1fr;
     }
 }

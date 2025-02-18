@@ -1,133 +1,148 @@
-/**********************************
-  BOOKING SECTION STYLES
-**********************************/
-.booking-section {
-    background-color: #8DCB8E;
-    padding: 3rem 2rem;
+/* Boka Bord Sektion */
+#boka-bord {
+    background-color: #1B2845;
+    padding: 3rem;
+    margin-top: 3rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     text-align: center;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    border-radius: 10px;
 }
 
-.booking-section h2 {
-    font-size: 1.8rem;
-    color: white;
-    margin-bottom: 1.5rem;
+/* Rubrik */
+#boka-bord h2 {
+    font-size: 2.5rem;
+    color: #fff;
+    margin-bottom: 2rem;
+    text-transform: uppercase;
+    font-weight: bold;
 }
 
-/* Main container for date/time panel + form side by side */
+
+/* Container för hela bokningssektionen */
 .booking-container {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 1.5rem;
-    max-width: 850px;
+    gap: 2rem;
+    max-width: 1200px;
     margin: 0 auto;
 }
 
-/* Anpassning för mindre skärmar */
-@media (max-width: 800px) {
+/* Vänster kolumn: Datum och tider */
+.date-time-panel {
+    background-color: #fff;
+    padding: 5rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.date-time-panel h3 {
+    font-size: 1.5rem;
+    color: #1B2845;
+    margin-bottom: 1rem;
+    font-weight: bold;
+}
+
+/* Datumväljare */
+.date-picker input {
+    padding: 0.8rem;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    width: 95%;
+    font-size: 1rem;
+}
+
+/* Tid-knappar */
+.time-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
+.time-btn {
+    padding: 0.8rem;
+    background-color: #1B2845;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.time-btn:hover {
+    background-color: #27445D;
+}
+
+/* Höger kolumn: Bokningsformulär */
+.booking-form {
+    background-color: #fff;
+    padding: 5rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+/* Höger kolumn: Bokningsformulär */
+.booking-form h3{
+    font-size: 1.5rem;
+    color: #1B2845;
+    margin-bottom: 1rem;
+    font-weight: bold;
+}
+
+
+/* Formuläretiketter och inputfält */
+.booking-form label {
+    font-weight: bold;
+    color: #1B2845;
+    text-align: left;
+}
+
+.booking-form input,
+.booking-form select {
+    padding: 0.8rem;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    width: auto;
+    font-size: 1rem;
+}
+
+.booking-form select {
+    cursor: pointer;
+}
+
+/* Boka-knapp */
+.booking-form button {
+    padding: 1rem;
+    background-color: #1B2845;
+    color: white;
+    font-size: 1.1rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.booking-form button:hover {
+    background-color: #27445D;
+}
+
+/* Responsivitet */
+@media (max-width: 900px) {
     .booking-container {
         grid-template-columns: 1fr;
     }
 }
 
-/* LEFT COLUMN (date + times) */
-.date-time-panel {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-}
+@media (max-width: 600px) {
+    #boka-bord h2 {
+        font-size: 2rem;
+    }
 
-/* Date picker “card” */
-.date-picker,
-.time-picker {
-    background-color: white;
-    border-radius: 6px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    padding: 1.2rem;
-    text-align: left;
-}
-
-.date-picker h3,
-.time-picker h3 {
-    font-size: 1.2rem;
-    color: #355628;
-    margin-bottom: 0.8rem;
-}
-
-/* Time grid */
-.time-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-}
-
-/* Time buttons */
-.time-btn {
-    background-color: lightgreen;
-    color: #355628;
-    border: 1px solid #355628;
-    padding: 0.4rem 1rem;
-    font-size: 0.9rem;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
-}
-
-.time-btn:hover {
-    background-color: #8DCB8E;
-    color: white;
-}
-
-/* RIGHT COLUMN (booking form) */
-.booking-form {
-    background-color: white;
-    border-radius: 6px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    padding: 1.2rem;
-    text-align: left;
-    display: flex;
-    flex-direction: column;
-    gap: 0.8rem;
-}
-
-.booking-form h3 {
-    font-size: 1.2rem;
-    color: #355628;
-    margin-bottom: 0.8rem;
-}
-
-.booking-form label {
-    font-size: 0.9rem;
-    font-weight: bold;
-    color: #355628;
-}
-
-.booking-form input,
-.booking-form select {
-    width: 100%;
-    padding: 0.4rem;
-    font-size: 0.9rem;
-    border-radius: 4px;
-    border: 1px solid #ccc;
-}
-
-/* Submit button */
-.booking-form button[type="submit"] {
-    margin-top: 0.8rem;
-    background-color: #fefaf5;
-    color: #355628;
-    border: 1px solid #355628;
-    padding: 0.6rem 1rem;
-    font-size: 0.9rem;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-.booking-form button[type="submit"]:hover {
-    background-color: #8DCB8E;
-    color: white;
+    .booking-form button {
+        font-size: 1rem;
+    }
 }
