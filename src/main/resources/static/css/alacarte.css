@@ -1,0 +1,95 @@
+/* A LA CARTE SECTION STYLES */
+.a-la-carte {
+    background-color: #fdf9f3;
+    padding: 4rem 1.5rem;
+    text-align: center;
+}
+
+/* Main section heading */
+.a-la-carte > h2 {
+    font-size: 2.2rem;
+    color: #2c4b34;
+    margin-bottom: 2rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: bold;
+}
+
+/* Columns container - 2x2 grid */
+.menu-columns {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Två kolumner per rad */
+    gap: 2rem;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+/* Each column “card” */
+.menu-columns .column {
+    background: linear-gradient(135deg, #fff 0%, #f6f6f6 100%);
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    text-align: left;
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.menu-columns .column:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+/* Subheading inside each column */
+.menu-columns .column h3 {
+    font-size: 1.2rem;
+    color: #2c4b34;
+    margin-bottom: 1rem;
+    border-bottom: 2px solid #2c4b34;
+    padding-bottom: 0.5rem;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+/* Lists styling */
+.menu-columns .column ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* Each menu item */
+.menu-columns .column li {
+    margin-bottom: 1rem;
+    line-height: 1.5;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #444;
+    transition: color 0.2s ease-in-out;
+}
+
+.menu-columns .column li:hover {
+    color: #2c4b34;
+}
+
+/* The <strong> text for dish names */
+.menu-columns .column li strong {
+    display: block;
+    color: #2c4b34;
+    font-weight: bold;
+    font-size: 1.05rem;
+}
+
+/* Small icon before each dish */
+.menu-columns .column li::before {
+    font-size: 1.1rem;
+    color: #2c4b34;
+}
+
+/* Responsiv design - Anpassar sig för små skärmar */
+@media (max-width: 768px) {
+    .menu-columns {
+        grid-template-columns: 1fr; /* En kolumn per rad på små skärmar */
+    }
+}

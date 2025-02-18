@@ -1,0 +1,71 @@
+.upcoming-events {
+    background-color: honeydew;
+    padding: 3rem 2rem;
+    text-align: center;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.upcoming-events h2 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+}
+
+.events-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+/* Styling för varje event */
+.event-item {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 1rem;
+    text-align: left;
+    overflow: hidden;
+    min-height: 100px;
+
+}
+
+
+/* Bildjustering */
+.event-item img {
+    width: 100%;
+    min-height: 80px;
+    object-fit: cover;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    display: block;
+}
+
+/* Titelstil */
+.event-item h3 {
+    font-size: 1.2rem;
+    color: #355628;
+    margin: 1rem 0 0.5rem;
+    text-transform: uppercase;
+}
+
+/* Ikon och textstil */
+.event-item p {
+    font-size: 0.9rem;
+    line-height: 1.4;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.event-item p span {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
