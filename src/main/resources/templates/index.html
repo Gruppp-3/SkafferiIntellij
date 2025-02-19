@@ -1,3 +1,5 @@
+<!-- Copy -->
+
 <!DOCTYPE html>
 <html lang="sv">
 <head>
@@ -7,7 +9,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-
 
     <title>Antons Skafferi</title>
     <link rel="stylesheet" href="/css/style.css" />
@@ -61,9 +62,9 @@
                 <h2 th:text="${'Dagens Lunch - ' + #dates.format(#dates.createNow(), 'EEEE')}">Dagens Lunch - Måndag:</h2>
                 <div th:each="item, itemStat : ${todayLunch}">
                     <p>
-                        <strong th:text="${itemStat.index == 0 ? 'Main Meal 1: ' :
-                                         itemStat.index == 1 ? 'Main Meal 2: ' :
-                                         itemStat.index == 2 ? 'Soup: ' : 'Additional Dish: '}">Main Meal 1:</strong>
+                        <strong th:text="${itemStat.index == 0 ? 'Lunchalternativ 1: ' :
+                                         itemStat.index == 1 ? 'Lunchalternativ 2: ' :
+                                         itemStat.index == 2 ? 'Lunchalternativ 3: ' : 'Additional Dish: '}">Main Meal 1:</strong>
                         <span th:text="${item.dish_name}">Dish Name</span>
                     </p>
                 </div>
@@ -168,43 +169,37 @@
         </div>
     </div>
 </section>
+
+
 <section id="boka-bord" class="booking-section">
     <h2>Boka Bord</h2>
 
     <div class="booking-container">
-        <!-- Left Column: Date + Times -->
+        <!-- Step 1: Date and Time Selection -->
         <div class="date-time-panel">
             <div class="date-picker">
                 <h3>Välj ett datum</h3>
                 <input type="date" id="datum" required />
             </div>
-                <! A calender availability  -->
             <div class="time-picker">
                 <h3>Tillgängliga tider</h3>
-                <div class="time-grid">
-                    <button class="time-btn">16:00</button>
-                    <button class="time-btn">16:30</button>
-                    <button class="time-btn">17:00</button>
-                    <button class="time-btn">17:30</button>
-                    <button class="time-btn">18:00</button>
-                    <button class="time-btn">18:30</button>
-                    <button class="time-btn">19:00</button>
-                    <button class="time-btn">19:30</button>
-                    <button class="time-btn">20:00</button>
-                    <button class="time-btn">20:30</button>
-                    <button class="time-btn">21:00</button>
-                    <button class="time-btn">21:30</button>
-                    <button class="time-btn">22:00</button>
-                    <button class="time-btn">22:30</button>
-                    <button class="time-btn">23:00</button>
+                <div class="time-grid" id="timeGrid">
+                    <!-- Times will be added here dynamically -->
                 </div>
             </div>
         </div>
 
-        <!-- Right Column: Booking Form -->
-        <form class="booking-form">
-            <h3>Fyll i dina uppgifter</h3>
+        <!-- Step 2: Table Selection -->
+        <div class="table-selection">
+            <h3>Välj bord</h3>
+            <div class="table-grid" id="tableGrid">
+                <!-- Tables will be added here dynamically -->
+            </div>
+        </div>
 
+        <!-- Step 3: Booking Form -->
+        <form class="booking-form" id="bookingForm">
+            <h3>Fyll i dina uppgifter</h3>
 
             <label for="namn">Namn</label>
             <input type="text" id="namn" placeholder="Ditt Namn" required />
@@ -223,9 +218,9 @@
                 <option value="4">4 personer</option>
                 <option value="5">5 personer</option>
                 <option value="6">6 personer</option>
-
             </select>
 
+            <div id="bookingStatus"></div>
             <button type="submit">Boka nu</button>
         </form>
     </div>
@@ -367,5 +362,6 @@
 
 </footer>
 
+<script src="/js/booking.js"></script>
 </body>
 </html>
