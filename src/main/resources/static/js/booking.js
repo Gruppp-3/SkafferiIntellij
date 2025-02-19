@@ -14,20 +14,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const today = new Date();
     dateInput.min = today.toISOString().split('T')[0];
 
-    // Mock data for booked tables (you would get this from your backend in reality)
-    const bookedTables = {
-        // Format: 'YYYY-MM-DD': { time: [tableIds] }
-        [today.toISOString().split('T')[0]]: {
-            '18:00': [1, 3],
-            '19:00': [2, 4]
-        },
-        // Tomorrow's bookings
-        [new Date(today.setDate(today.getDate() + 1)).toISOString().split('T')[0]]: {
-            '18:30': [5, 6],
-            '20:00': [1, 2]
-        }
-    };
-
     // Table configuration
     const tables = [
         { id: 1, seats: 2, location: 'Fönster' },
@@ -38,85 +24,89 @@ document.addEventListener('DOMContentLoaded', function() {
         { id: 6, seats: 6, location: 'Mitten' }
     ];
 
-    function isTableBooked(tableId, date, time) {
-        return bookedTables[date]?.hasOwnProperty(time) &&
-            bookedTables[date][time].includes(tableId);
+    // Fetch booked tables from database
+    async function getBookedTables(date) {
+        try {
+            const response = await fetch(`/api/bookings/booked-tables?date=${date}`);
+            if (!response.ok) throw new Error('Failed to fetch bookings');
+            return await response.json();
+        } catch (error) {
+            console.error('Error fetching booked tables:', error);
+            return {};
+        }
     }
 
-    function updateTables() {
+    async function displayAvailableTimes(date) {
+        try {
+            const response = await fetch(`/api/bookings/availability?date=${date}`);
+            if (!response.ok) throw new Error('Failed to fetch available times');
+            const times = await response.json();
+
+            timeGrid.innerHTML = '';
+            times.forEach(time => {
+                const timeBtn = document.createElement('button');
+                timeBtn.className = 'time-btn';
+                timeBtn.textContent = time;
+                timeBtn.onclick = () => selectTime(time, timeBtn);
+                timeGrid.appendChild(timeBtn);
+            });
+        } catch (error) {
+            console.error('Error:', error);
+            statusDiv.textContent = 'Kunde inte hämta tillgängliga tider';
+            statusDiv.className = 'error';
+        }
+    }
+
+    async function updateTables() {
         const date = dateInput.value;
         const selectedPeople = parseInt(document.getElementById('antal').value);
 
-        tableGrid.innerHTML = '';
-        tables.forEach(table => {
-            const tableBtn = document.createElement('button');
-            tableBtn.className = 'table-btn';
+        try {
+            const bookedTablesData = await getBookedTables(date);
 
-            // Check if table is booked for selected time
-            const isBooked = selectedTime && isTableBooked(table.id, date, selectedTime);
-            // Check if table has enough seats
-            const isTooSmall = table.seats < selectedPeople;
+            tableGrid.innerHTML = '';
+            tables.forEach(table => {
+                const tableBtn = document.createElement('button');
+                tableBtn.className = 'table-btn';
 
-            if (isBooked) {
-                tableBtn.classList.add('booked');
-                tableBtn.title = 'Bordet är redan bokat';
-            }
-            if (isTooSmall) {
-                tableBtn.classList.add('too-small');
-                tableBtn.title = 'För litet bord för sällskapet';
-            }
+                const isBooked = selectedTime &&
+                    bookedTablesData[selectedTime]?.includes(table.id);
+                const isTooSmall = table.seats < selectedPeople;
 
-            tableBtn.innerHTML = `
-                <div>Bord ${table.id}</div>
-                <div>${table.seats} platser</div>
-                <div class="table-location">${table.location}</div>
-                ${isBooked ? '<div class="booked-label">Upptaget</div>' : ''}
-            `;
+                if (isBooked) {
+                    tableBtn.classList.add('booked');
+                    tableBtn.title = 'Bordet är redan bokat';
+                }
+                if (isTooSmall) {
+                    tableBtn.classList.add('too-small');
+                    tableBtn.title = 'För litet bord för sällskapet';
+                }
 
-            if (!isBooked && !isTooSmall) {
-                tableBtn.onclick = () => selectTable(table, tableBtn);
-            }
+                tableBtn.innerHTML = `
+                    <div>Bord ${table.id}</div>
+                    <div>${table.seats} platser</div>
+                    <div class="table-location">${table.location}</div>
+                    ${isBooked ? '<div class="booked-label">Upptaget</div>' : ''}
+                `;
 
-            tableGrid.appendChild(tableBtn);
-        });
-    }
+                if (!isBooked && !isTooSmall) {
+                    tableBtn.onclick = () => selectTable(table, tableBtn);
+                }
 
-    // Update your time display function
-    function displayAvailableTimes(date) {
-        const times = [
-            "16:00", "16:30", "17:00", "17:30", "18:00", "18:30",
-            "19:00", "19:30", "20:00", "20:30", "21:00", "21:30"
-        ];
-
-        timeGrid.innerHTML = '';
-        times.forEach(time => {
-            const timeBtn = document.createElement('button');
-            timeBtn.className = 'time-btn';
-
-            // Check if all tables are booked for this time
-            const bookedTablesForTime = bookedTables[date]?.[time] || [];
-            const isFullyBooked = bookedTablesForTime.length === tables.length;
-
-            if (isFullyBooked) {
-                timeBtn.classList.add('fully-booked');
-                timeBtn.title = 'Fullbokat denna tid';
-            }
-
-            timeBtn.textContent = time;
-
-            if (!isFullyBooked) {
-                timeBtn.onclick = () => selectTime(time, timeBtn);
-            }
-
-            timeGrid.appendChild(timeBtn);
-        });
+                tableGrid.appendChild(tableBtn);
+            });
+        } catch (error) {
+            console.error('Error:', error);
+            statusDiv.textContent = 'Kunde inte uppdatera bordsstatus';
+            statusDiv.className = 'error';
+        }
     }
 
     function selectTime(time, btn) {
         document.querySelectorAll('.time-btn').forEach(b => b.classList.remove('selected'));
         btn.classList.add('selected');
         selectedTime = time;
-        updateTables(); // Update tables when time is selected
+        updateTables();
     }
 
     function selectTable(table, btn) {
@@ -135,13 +125,61 @@ document.addEventListener('DOMContentLoaded', function() {
 
     document.getElementById('antal').addEventListener('change', updateTables);
 
+    // Booking Form Handler
+
+    bookingForm.addEventListener('submit', async function(e) {
+        e.preventDefault();
+
+        if (!selectedTime || !selectedTable) {
+            document.getElementById('bookingStatus').textContent = 'Vänligen välj både tid och bord';
+            return;
+        }
+
+        const formData = {
+            name: document.getElementById('namn').value,
+            email: document.getElementById('email').value,
+            phone: document.getElementById('telefon').value,
+            date: dateInput.value,
+            time: selectedTime + ":00", // Add seconds to match TIME format
+            peopleCount: parseInt(document.getElementById('antal').value),
+            tableNumber: selectedTable.id
+        };
+
+        try {
+            const response = await fetch('/api/bookings', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData)
+            });
+
+            if (response.ok) {
+                document.getElementById('bookingStatus').textContent = 'Bokning bekräftad!';
+                bookingForm.reset();
+                // Remove these lines that automatically refresh
+                // displayAvailableTimes(dateInput.value);
+                // updateTables();
+
+                // Instead, just clear the selection
+                selectedTime = null;
+                selectedTable = null;
+                document.querySelectorAll('.selected').forEach(el =>
+                    el.classList.remove('selected')
+                );
+            } else {
+                const error = await response.json();
+                document.getElementById('bookingStatus').textContent =
+                    error.message || 'Bokning misslyckades';
+            }
+        } catch (error) {
+            document.getElementById('bookingStatus').textContent =
+                'Kunde inte genomföra bokningen';
+        }
+    });
+
     // Initialize with today's date
     dateInput.value = new Date().toISOString().split('T')[0];
     displayAvailableTimes(dateInput.value);
     updateTables();
-
-    // Form submission handling remains the same...
-    bookingForm.addEventListener('submit', async function(e) {
-        // ... your existing form submission code
-    });
 });

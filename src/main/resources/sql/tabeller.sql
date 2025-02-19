@@ -89,6 +89,8 @@ CREATE TABLE WORK_SHIFT (
 -- 11. Tabell för bokningar
 CREATE TABLE BOOKING (
                          BOOKING_ID INT AUTO_INCREMENT PRIMARY KEY,
+                         /*La till TABLE_NUMBER */
+                         TABLE_NUMBER INT NOT NULL,
                          NAME VARCHAR(255) NOT NULL,
                          EMAIL VARCHAR(255) NOT NULL,
                          PHONE VARCHAR(20) NOT NULL,

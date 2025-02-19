@@ -99,6 +99,11 @@ INSERT INTO WORK_SHIFT (START_TIME, END_TIME, DESCRIPTION, EMPLOYEE_ID) VALUES
                                                                             ('2025-02-17 16:00:00', '2025-02-17 23:59:59', 'Kvällspass', 2);
 
 -- 11. Bookings
-INSERT INTO BOOKING (NAME, EMAIL, PHONE, DATE, TIME, PEOPLE_COUNT) VALUES
-                                                                       ('Alice Johnson', 'alice@example.com', '0701234567', '2025-02-18', '18:00:00', 4),
--
+INSERT INTO BOOKING (NAME, EMAIL, PHONE, DATE, TIME, PEOPLE_COUNT, TABLE_NUMBER)
+VALUES
+    ('Alice Johnson', 'alice@example.com', '0701234567', '2024-02-19', '18:00:00', 4, 2),
+    ('Bob Smith', 'bob@example.com', '0707654321', '2024-02-19', '18:00:00', 2, 1),
+    ('Carol Davis', 'carol@example.com', '0703334444', '2024-02-19', '19:30:00', 6, 3),
+    ('David Wilson', 'david@example.com', '0705556666', '2024-02-20', '18:30:00', 4, 5),
+    ('Eva Brown', 'eva@example.com', '0708889999', '2024-02-20', '18:30:00', 2, 4),
+    ('Frank Miller', 'frank@example.com', '0702223333', '2024-02-20', '20:00:00', 6, 6);

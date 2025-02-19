@@ -1,18 +1,27 @@
 package com.example.first_restaurant.entity;
 
 import jakarta.persistence.*;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalTime;
+
+
 
 @Entity
 @Table(name = "BOOKING")
 public class Booking {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     @Column(name = "BOOKING_ID")
     private Integer bookingId;
+
+    // La till table i databasen och i klassen
+    @Column(name = "TABLE_NUMBER")
+    private Integer tableNumber;
 
     @Column(name = "NAME")
     private String name;
@@ -39,6 +48,15 @@ public class Booking {
     public Integer getBookingId() {
         return bookingId;
     }
+
+    public Integer getTableNumber() {
+        return tableNumber;
+    }
+
+    public void setTableNumber(Integer tableNumber) {
+        this.tableNumber = tableNumber;
+    }
+
 
     public void setBookingId(Integer bookingId) {
         this.bookingId = bookingId;
