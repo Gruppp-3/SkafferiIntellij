@@ -34,6 +34,7 @@ CREATE TABLE LUNCH_MENU (
 CREATE TABLE LUNCH_DISH (
                             LUNCH_DISH_ID INT AUTO_INCREMENT PRIMARY KEY,
                             LUNCH_DISH_NAME VARCHAR(50),
+                            LUNCH_DISH_DESCRIPTION VARCHAR(255),
                             LUNCH_DISH_PRICE DECIMAL(5,2),
                             LUNCH_ID INT,
                             FOREIGN KEY (LUNCH_ID) REFERENCES LUNCH_MENU(LUNCH_ID)
