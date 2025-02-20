@@ -56,32 +56,122 @@ INSERT INTO LUNCH_MENU (LUNCH_DATE) VALUES
                                         ('2025-02-21'); -- Friday (ID: 5)
 
 -- 7. Lunch Dishes
-INSERT INTO LUNCH_DISH (LUNCH_DISH_NAME, LUNCH_DISH_DESCRIPTION, LUNCH_DISH_PRICE, LUNCH_ID) VALUES
-                                                                                                 -- Monday
-                                                                                                 ('Kycklingfilé', 'Serveras med ugnsrostade grönsaker, örtig vitlökssås och ris', 125.00, 1),
-                                                                                                 ('Vegetarisk Lasagne', 'Gjord på linser, zucchini och morot', 115.00, 1),
-                                                                                                 ('Svampsoppa', 'Krämig soppa med skogschampinjoner', 95.00, 1),
+DELETE FROM LUNCH_DISH
+WHERE LUNCH_ID IN (
+    SELECT LUNCH_ID
+    FROM LUNCH_MENU
+    WHERE LUNCH_DATE BETWEEN '2025-02-17' AND '2025-02-23'
+);
 
-                                                                                                 -- Tuesday
-                                                                                                 ('Pannbiff', 'Serveras med kokt potatis, löksås och lingonsylt', 125.00, 2),
-                                                                                                 ('Halloumigryta', 'Smakrik gryta med ris och färska grönsaker', 115.00, 2),
-                                                                                                 ('Tomatsoppa', 'Krämig tomatsoppa med basilika och vitlöksbröd', 95.00, 2),
+DELETE FROM LUNCH_MENU
+WHERE LUNCH_DATE BETWEEN '2025-02-17' AND '2025-02-23';
 
-                                                                                                 -- Wednesday
-                                                                                                 ('Torskrygg', 'Serveras med potatispuré, citronsås och haricots verts', 125.00, 3),
-                                                                                                 ('Vegetarisk Curry', 'Kryddig gryta med kokosmjölk, kikärtor och grönsaker', 115.00, 3),
-                                                                                                 ('Gulaschsoppa', 'Traditionell gulaschsoppa med surdegsbröd', 95.00, 3),
+-- Insert menu entries for each day
+INSERT INTO LUNCH_MENU (LUNCH_DATE) VALUES
+                                        ('2025-02-17'), -- Monday
+                                        ('2025-02-18'), -- Tuesday
+                                        ('2025-02-19'), -- Wednesday
+                                        ('2025-02-20'), -- Thursday
+                                        ('2025-02-21'), -- Friday
+                                        ('2025-02-22'), -- Saturday
+                                        ('2025-02-23'); -- Sunday
 
-                                                                                                 -- Thursday
-                                                                                                 ('Fläsk med Raggmunk', 'Serveras med rårörda lingon', 125.00, 4),
-                                                                                                 ('Bönbiffar', 'Serveras med rostad potatis och örtsås', 115.00, 4),
-                                                                                                 ('Minestronesoppa', 'Italiensk grönsakssoppa med pasta', 95.00, 4),
+-- Insert Monday's dishes
+INSERT INTO LUNCH_DISH (LUNCH_DISH_NAME, LUNCH_DISH_PRICE, LUNCH_ID)
+SELECT 'Kycklingfilé med ugnsrostade grönsaker', 129.00, LUNCH_ID
+FROM LUNCH_MENU WHERE LUNCH_DATE = '2025-02-17';
 
-                                                                                                 -- Friday
-                                                                                                 ('Grillad Lax', 'Serveras med hollandaisesås, sparris och pressad potatis', 125.00, 5),
-                                                                                                 ('Svamprisotto', 'Krämig risotto med skogssvamp och parmesan', 115.00, 5),
-                                                                                                 ('Skaldjurssoppa', 'Krämig skaldjurssoppa med aioli', 95.00, 5);
+INSERT INTO LUNCH_DISH (LUNCH_DISH_NAME, LUNCH_DISH_PRICE, LUNCH_ID)
+SELECT 'Vegetarisk lasagne', 119.00, LUNCH_ID
+FROM LUNCH_MENU WHERE LUNCH_DATE = '2025-02-17';
 
+INSERT INTO LUNCH_DISH (LUNCH_DISH_NAME, LUNCH_DISH_PRICE, LUNCH_ID)
+SELECT 'Svampsoppa', 99.00, LUNCH_ID
+FROM LUNCH_MENU WHERE LUNCH_DATE = '2025-02-17';
+
+-- Insert Tuesday's dishes
+INSERT INTO LUNCH_DISH (LUNCH_DISH_NAME, LUNCH_DISH_PRICE, LUNCH_ID)
+SELECT 'Pannbiff med löksås', 125.00, LUNCH_ID
+FROM LUNCH_MENU WHERE LUNCH_DATE = '2025-02-18';
+
+INSERT INTO LUNCH_DISH (LUNCH_DISH_NAME, LUNCH_DISH_PRICE, LUNCH_ID)
+SELECT 'Falukorv i ugn med tomat och ost', 115.00, LUNCH_ID
+FROM LUNCH_MENU WHERE LUNCH_DATE = '2025-02-18';
+
+INSERT INTO LUNCH_DISH (LUNCH_DISH_NAME, LUNCH_DISH_PRICE, LUNCH_ID)
+SELECT 'Halloumigryta', 119.00, LUNCH_ID
+FROM LUNCH_MENU WHERE LUNCH_DATE = '2025-02-18';
+
+-- Insert Wednesday's dishes
+INSERT INTO LUNCH_DISH (LUNCH_DISH_NAME, LUNCH_DISH_PRICE, LUNCH_ID)
+SELECT 'Torskrygg med citronsås', 139.00, LUNCH_ID
+FROM LUNCH_MENU WHERE LUNCH_DATE = '2025-02-19';
+
+INSERT INTO LUNCH_DISH (LUNCH_DISH_NAME, LUNCH_DISH_PRICE, LUNCH_ID)
+SELECT 'Pasta Carbonara', 119.00, LUNCH_ID
+FROM LUNCH_MENU WHERE LUNCH_DATE = '2025-02-19';
+
+INSERT INTO LUNCH_DISH (LUNCH_DISH_NAME, LUNCH_DISH_PRICE, LUNCH_ID)
+SELECT 'Vegetarisk currygryta', 115.00, LUNCH_ID
+FROM LUNCH_MENU WHERE LUNCH_DATE = '2025-02-19';
+
+-- Insert Thursday's dishes
+INSERT INTO LUNCH_DISH (LUNCH_DISH_NAME, LUNCH_DISH_PRICE, LUNCH_ID)
+SELECT 'Stekt fläsk med raggmunk', 129.00, LUNCH_ID
+FROM LUNCH_MENU WHERE LUNCH_DATE = '2025-02-20';
+
+INSERT INTO LUNCH_DISH (LUNCH_DISH_NAME, LUNCH_DISH_PRICE, LUNCH_ID)
+SELECT 'Kycklinggryta med dragon', 125.00, LUNCH_ID
+FROM LUNCH_MENU WHERE LUNCH_DATE = '2025-02-20';
+
+INSERT INTO LUNCH_DISH (LUNCH_DISH_NAME, LUNCH_DISH_PRICE, LUNCH_ID)
+SELECT 'Vegetarisk böngryta', 115.00, LUNCH_ID
+FROM LUNCH_MENU WHERE LUNCH_DATE = '2025-02-20';
+
+-- Insert Friday's dishes
+INSERT INTO LUNCH_DISH (LUNCH_DISH_NAME, LUNCH_DISH_PRICE, LUNCH_ID)
+SELECT 'Grillad lax med hollandaise', 139.00, LUNCH_ID
+FROM LUNCH_MENU WHERE LUNCH_DATE = '2025-02-21';
+
+INSERT INTO LUNCH_DISH (LUNCH_DISH_NAME, LUNCH_DISH_PRICE, LUNCH_ID)
+SELECT 'Pasta Carbonara', 119.00, LUNCH_ID
+FROM LUNCH_MENU WHERE LUNCH_DATE = '2025-02-21';
+
+INSERT INTO LUNCH_DISH (LUNCH_DISH_NAME, LUNCH_DISH_PRICE, LUNCH_ID)
+SELECT 'Vegetarisk currygryta', 115.00, LUNCH_ID
+FROM LUNCH_MENU WHERE LUNCH_DATE = '2025-02-21';
+
+-- Insert Saturday's dishes
+INSERT INTO LUNCH_DISH (LUNCH_DISH_NAME, LUNCH_DISH_PRICE, LUNCH_ID)
+SELECT 'Torskrygg med citronsås', 139.00, LUNCH_ID
+FROM LUNCH_MENU WHERE LUNCH_DATE = '2025-02-22';
+
+INSERT INTO LUNCH_DISH (LUNCH_DISH_NAME, LUNCH_DISH_PRICE, LUNCH_ID)
+SELECT 'Pasta Carbonara', 119.00, LUNCH_ID
+FROM LUNCH_MENU WHERE LUNCH_DATE = '2025-02-22';
+
+INSERT INTO LUNCH_DISH (LUNCH_DISH_NAME, LUNCH_DISH_PRICE, LUNCH_ID)
+SELECT 'Vegetarisk currygryta', 115.00, LUNCH_ID
+FROM LUNCH_MENU WHERE LUNCH_DATE = '2025-02-22';
+
+-- Insert Sunday's dishes
+INSERT INTO LUNCH_DISH (LUNCH_DISH_NAME, LUNCH_DISH_PRICE, LUNCH_ID)
+SELECT 'Pannbiff med löksås', 125.00, LUNCH_ID
+FROM LUNCH_MENU WHERE LUNCH_DATE = '2025-02-23';
+
+INSERT INTO LUNCH_DISH (LUNCH_DISH_NAME, LUNCH_DISH_PRICE, LUNCH_ID)
+SELECT 'Pasta Carbonara', 119.00, LUNCH_ID
+FROM LUNCH_MENU WHERE LUNCH_DATE = '2025-02-23';
+
+INSERT INTO LUNCH_DISH (LUNCH_DISH_NAME, LUNCH_DISH_PRICE, LUNCH_ID)
+SELECT 'Halloumigryta', 119.00, LUNCH_ID
+FROM LUNCH_MENU WHERE LUNCH_DATE = '2025-02-23';
+
+-- Skriver ut lunchmenyn
+SELECT lm.LUNCH_DATE, ld.LUNCH_DISH_NAME
+FROM LUNCH_MENU lm
+         LEFT JOIN LUNCH_DISH ld ON lm.LUNCH_ID = ld.LUNCH_ID
+ORDER BY lm.LUNCH_DATE;
 -- 8. Sample Orders
 INSERT INTO ORDERS (ORDER_DATE, TABLE_NUMBER, IS_FINISHED) VALUES
                                                                ('2025-02-17', 1, FALSE),
