@@ -115,6 +115,7 @@ document.addEventListener('DOMContentLoaded', function() {
         selectedTable = table;
     }
 
+
     // Event listeners
     dateInput.addEventListener('change', function() {
         selectedTime = null;

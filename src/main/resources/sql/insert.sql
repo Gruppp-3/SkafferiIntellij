@@ -98,6 +98,7 @@ INSERT INTO WORK_SHIFT (START_TIME, END_TIME, DESCRIPTION, EMPLOYEE_ID) VALUES
                                                                             ('2025-02-17 08:00:00', '2025-02-17 16:00:00', 'Morgonpass', 1),
                                                                             ('2025-02-17 16:00:00', '2025-02-17 23:59:59', 'Kvällspass', 2);
 
+
 -- 11. Bookings
 INSERT INTO BOOKING (NAME, EMAIL, PHONE, DATE, TIME, PEOPLE_COUNT, TABLE_NUMBER)
 VALUES
