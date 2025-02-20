@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
     <title>Antons Skafferi</title>
     <link rel="stylesheet" href="/css/style.css" />
@@ -19,10 +20,12 @@
     <link rel="stylesheet" href="/css/menu.css" />
     <link rel="stylesheet" href="/css/VeckansMeny.css" />
     <link rel="stylesheet" href="/css/about.css" />
+        <link rel="stylesheet" href="/css/header.css" />
 
 
 </head>
 <body>
+
 
 <!-- HEADER (Combine Logo + Nav) -->
 <header class="top-header">
@@ -32,7 +35,12 @@
         </a>
     </div>
 
+    <!-- Menu Toggle Button (Visible only on mobile) -->
+    <div class="menu-toggle" id="menuToggle">
+        <i class="material-icons">menu</i> <!-- Tre streck ikon -->
+    </div>
 
+    <!-- Main Navbar (Hidden on mobile) -->
     <nav class="navbar">
         <ul>
             <li><a href="#">HEM</a></li>
@@ -40,15 +48,47 @@
             <li><a href="#alacarte">A La Carte</a></li>
             <li><a href="#events">Evenemang</a></li>
             <li><a href="#om-oss">OM OSS</a></li>
-
         </ul>
     </nav>
 
+    <!-- Boka Bord Button (Visible only on desktop) -->
     <div class="boka-bord">
         <a href="#boka-bord">BOKA BORD</a>
     </div>
 </header>
 
+<!-- Side Menu -->
+<aside class="side-menu" id="sideMenu">
+    <!-- Close Button -->
+    <div class="close-menu" id="closeMenu">
+        <i class="material-icons">close</i>
+    </div>
+
+    <!-- Logo at the Top -->
+    <div class="side-menu-logo">
+        <a href="index.html">
+            <img src="/images/logo1.png" alt="Antons Skafferi" class="logo">
+        </a>
+    </div>
+
+    <!-- Menu Links -->
+    <ul>
+        <li><a href="#" class="menu-item"><i class="material-icons">home</i>HEM</a></li>
+        <li><a href="#meno" class="menu-item"><i class="material-icons">restaurant_menu</i>MENU</a></li>
+        <li><a href="#alacarte" class="menu-item"><i class="material-icons">local_dining</i>A La Carte</a></li>
+        <li><a href="#events" class="menu-item"><i class="material-icons">event</i>Evenemang</a></li>
+        <li><a href="#om-oss" class="menu-item"><i class="material-icons">info</i>OM OSS</a></li>
+    </ul>
+
+    <!-- Boka Bord Button -->
+    <div class="side-menu-boka">
+        <a href="#boka-bord">BOKA BORD</a>
+    </div>
+</aside>
+
+
+
+<!--------------------------------Ovan är om header ----------------------------------->
 
 <!-- HERO SECTION -->
 <section class="hero">
@@ -360,6 +400,33 @@
         function scrollToTop() {
             window.scrollTo({ top: 0, behavior: "smooth" });
         }
+    </script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const menuToggle = document.getElementById("menuToggle");
+            const sideMenu = document.getElementById("sideMenu");
+            const closeMenu = document.getElementById("closeMenu");
+            const menuItems = document.querySelectorAll(".menu-item");
+
+            // Öppna sidomeny
+            menuToggle.addEventListener("click", function() {
+                sideMenu.style.left = "0";
+            });
+
+            // Stäng sidomeny (med X-knappen)
+            closeMenu.addEventListener("click", function() {
+                sideMenu.style.left = "-250px";
+            });
+
+            // Stäng sidomeny när en menyknapp klickas
+            menuItems.forEach(item => {
+                item.addEventListener("click", function() {
+                    sideMenu.style.left = "-250px";
+                });
+            });
+        });
+
     </script>
 
 

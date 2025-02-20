@@ -3,7 +3,6 @@
     color: white;
     padding: 40px 0;
     text-align: center;
-
 }
 
 .footer-container {
@@ -12,7 +11,6 @@
     max-width: 1100px;
     margin: 0 auto;
     flex-wrap: wrap;
-
 }
 
 .footer-column {
@@ -42,7 +40,6 @@
     margin: 5px 0;
 }
 
-
 .footer-column ul li a {
     color: white;
     text-decoration: none;
@@ -70,11 +67,21 @@
     color: #1b2845;
 }
 
+/* E-poststil */
+.footer-column a[href^="mailto:"] {
+    color: #355628;
+    font-weight: bold;
+}
+
+.footer-column a[href^="mailto:"]:hover {
+    color: #fff;
+    text-decoration: underline;
+}
+
 /* Copyright */
 .footer-bottom {
     margin-top: 20px;
     font-size: 14px;
     border-top: 1px solid #355628;
     padding-top: 10px;
-
 }
