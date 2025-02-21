@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 
+import java.time.format.DateTimeFormatter;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -95,7 +96,13 @@ public class Booking {
     }
 
     public LocalTime getTime() {
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm");
+
+        // Vi vill ha tiden på HH:MM inte HH:MM:SS
+        String text = time.format(dtf);
+        time = LocalTime.parse(text, dtf);
         return time;
+
     }
 
     public void setTime(LocalTime time) {

@@ -1,5 +1,4 @@
 package com.example.first_restaurant.controller;
-
 import com.example.first_restaurant.entity.Booking;
 import com.example.first_restaurant.service.BookingService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,9 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
-
 import java.util.List;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

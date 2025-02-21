@@ -1,5 +1,4 @@
 package com.example.first_restaurant.controller;
-
 import com.example.first_restaurant.entity.Booking;
 import com.example.first_restaurant.service.BookingService;
 import org.springframework.beans.factory.annotation.Autowired;
