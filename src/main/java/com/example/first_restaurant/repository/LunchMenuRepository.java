@@ -12,4 +12,10 @@ import java.util.Optional;
 public interface LunchMenuRepository extends JpaRepository<LunchMenu, Long> {
     Optional<LunchMenu> findByLunchDate(LocalDate date);
     List<LunchMenu> findByLunchDateBetween(LocalDate startDate, LocalDate endDate);
+
+    // New method to fetch menus for a specific week
+    default List<LunchMenu> findWeeklyMenus(LocalDate startOfWeek) {
+        LocalDate endOfWeek = startOfWeek.plusDays(6);
+        return findByLunchDateBetween(startOfWeek, endOfWeek);
+    }
 }
