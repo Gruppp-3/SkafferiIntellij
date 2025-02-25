@@ -158,11 +158,8 @@ document.addEventListener('DOMContentLoaded', function() {
             if (response.ok) {
                 document.getElementById('bookingStatus').textContent = 'Bokning bekräftad!';
                 bookingForm.reset();
-                // Remove these lines that automatically refresh
-                // displayAvailableTimes(dateInput.value);
-                // updateTables();
 
-                // Instead, just clear the selection
+                // Clear the selection
                 selectedTime = null;
                 selectedTable = null;
                 document.querySelectorAll('.selected').forEach(el =>

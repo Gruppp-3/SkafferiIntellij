@@ -14,8 +14,4 @@ public class Course {
     private String type;
     private Integer sequence;
 
-    @OneToMany(mappedBy = "course")
-    private List<MenuItem> menuItems;
-
-
 }

@@ -8,46 +8,40 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
 public class BookingService {
+    private static final List<String> ALL_TIME_SLOTS = Arrays.asList(
+            "16:00", "16:30", "17:00", "17:30", "18:00", "18:30",
+            "19:00", "19:30", "20:00", "20:30", "21:00", "21:30",
+            "22:00", "22:30", "23:00"
+    );
+    private static final int TOTAL_TABLES = 6; // Configuration value
+
+    @Autowired
+    private BookingRepository bookingRepository;
 
     public List<Booking> getAllBookings() {
         return bookingRepository.findAllByOrderByDateAscTimeAsc();
     }
 
-    @Autowired
-    private BookingRepository bookingRepository;
-
     public List<String> getAvailableTimeSlots(LocalDate date) {
-        // Define all possible time slots
-        List<String> allTimeSlots = Arrays.asList(
-                "16:00", "16:30", "17:00", "17:30", "18:00", "18:30",
-                "19:00", "19:30", "20:00", "20:30", "21:00", "21:30",
-                "22:00", "22:30", "23:00"
-        );
-
         // Get bookings for the date
         List<Booking> existingBookings = bookingRepository.findByDate(date);
 
         // Count how many tables are booked for each time
         Map<String, Long> bookedTablesCount = existingBookings.stream()
                 .collect(Collectors.groupingBy(
-                        booking -> booking.getTime().toString().substring(0, 5),
+                        booking -> formatTime(booking.getTime()),
                         Collectors.counting()
                 ));
 
-        // Total number of tables
-        final int TOTAL_TABLES = 6; // Assuming you have 6 tables
-
         // Return time slots where not all tables are booked
-        return allTimeSlots.stream()
-                .filter(time -> {
-                    Long bookedTables = bookedTablesCount.getOrDefault(time, 0L);
-                    return bookedTables < TOTAL_TABLES; // Time is available if at least one table is free
-                })
+        return ALL_TIME_SLOTS.stream()
+                .filter(time -> bookedTablesCount.getOrDefault(time, 0L) < TOTAL_TABLES)
                 .collect(Collectors.toList());
     }
 
@@ -56,11 +50,9 @@ public class BookingService {
         Map<String, List<Integer>> bookedTables = new HashMap<>();
 
         for (Booking booking : bookings) {
-            String timeKey = booking.getTime().toString().substring(0, 5);
-            if (!bookedTables.containsKey(timeKey)) {
-                bookedTables.put(timeKey, new ArrayList<>());
-            }
-            bookedTables.get(timeKey).add(booking.getTableNumber());
+            String timeKey = formatTime(booking.getTime());
+            bookedTables.computeIfAbsent(timeKey, k -> new ArrayList<>())
+                    .add(booking.getTableNumber());
         }
 
         return bookedTables;
@@ -81,9 +73,11 @@ public class BookingService {
 
         return bookingRepository.save(booking);
     }
+
     public void deleteAllBookings() {
         bookingRepository.deleteAll();
     }
+
     public Booking getBookingById(Integer id) {
         Optional<Booking> booking = bookingRepository.findById(id);
         if (booking.isPresent()) {
@@ -103,31 +97,22 @@ public class BookingService {
 
     public Booking updateBooking(Integer id, Booking bookingDetails) {
         Booking existingBooking = getBookingById(id);
-
-        // Update fields using the correct names from your entity
-        if (bookingDetails.getTableNumber() != null) {
-            existingBooking.setTableNumber(bookingDetails.getTableNumber());
-        }
-        if (bookingDetails.getName() != null) {
-            existingBooking.setName(bookingDetails.getName());
-        }
-        if (bookingDetails.getEmail() != null) {
-            existingBooking.setEmail(bookingDetails.getEmail());
-        }
-        if (bookingDetails.getPhone() != null) {
-            existingBooking.setPhone(bookingDetails.getPhone());
-        }
-        if (bookingDetails.getDate() != null) {
-            existingBooking.setDate(bookingDetails.getDate());
-        }
-        if (bookingDetails.getTime() != null) {
-            existingBooking.setTime(bookingDetails.getTime());
-        }
-        if (bookingDetails.getPeopleCount() != null) {
-            existingBooking.setPeopleCount(bookingDetails.getPeopleCount());
-        }
-
+        updateBookingFields(existingBooking, bookingDetails);
         return bookingRepository.save(existingBooking);
     }
 
+    // Helper methods
+    private void updateBookingFields(Booking target, Booking source) {
+        if (source.getTableNumber() != null) target.setTableNumber(source.getTableNumber());
+        if (source.getName() != null) target.setName(source.getName());
+        if (source.getEmail() != null) target.setEmail(source.getEmail());
+        if (source.getPhone() != null) target.setPhone(source.getPhone());
+        if (source.getDate() != null) target.setDate(source.getDate());
+        if (source.getTime() != null) target.setTime(source.getTime());
+        if (source.getPeopleCount() != null) target.setPeopleCount(source.getPeopleCount());
+    }
+
+    private String formatTime(LocalTime time) {
+        return time.toString().substring(0, 5);
+    }
 }

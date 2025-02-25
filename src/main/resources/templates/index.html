@@ -1,7 +1,5 @@
-<!-- Copy -->
-
 <!DOCTYPE html>
-<html lang="sv">
+<html lang="sv" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -20,17 +18,14 @@
     <link rel="stylesheet" href="/css/menu.css" />
     <link rel="stylesheet" href="/css/VeckansMeny.css" />
     <link rel="stylesheet" href="/css/about.css" />
-        <link rel="stylesheet" href="/css/header.css" />
-
-
+    <link rel="stylesheet" href="/css/header.css" />
 </head>
 <body>
-
 
 <!-- HEADER (Combine Logo + Nav) -->
 <header class="top-header">
     <div class="logo-container">
-        <a href="index.html">
+        <a th:href="@{/}">
             <img src="/images/logo1.png" alt="Antons Skafferi" class="logo">
         </a>
     </div>
@@ -43,7 +38,7 @@
     <!-- Main Navbar (Hidden on mobile) -->
     <nav class="navbar">
         <ul>
-            <li><a href="#">HEM</a></li>
+            <li><a th:href="@{/}">HEM</a></li>
             <li><a href="#meno">MENU</a></li>
             <li><a href="#alacarte">A LA CARTE</a></li>
             <li><a href="#events">EVENEMANG</a></li>
@@ -66,14 +61,14 @@
 
     <!-- Logo at the Top -->
     <div class="side-menu-logo">
-        <a href="index.html">
+        <a th:href="@{/}">
             <img src="/images/logo1.png" alt="Antons Skafferi" class="logo">
         </a>
     </div>
 
     <!-- Menu Links -->
     <ul>
-        <li><a href="#" class="menu-item"><i class="material-icons">home</i>HEM</a></li>
+        <li><a th:href="@{/}" class="menu-item"><i class="material-icons">home</i>HEM</a></li>
         <li><a href="#meno" class="menu-item"><i class="material-icons">restaurant_menu</i>MENU</a></li>
         <li><a href="#alacarte" class="menu-item"><i class="material-icons">local_dining</i>A LA CARTE</a></li>
         <li><a href="#events" class="menu-item"><i class="material-icons">event</i>EVENEMANG</a></li>
@@ -86,8 +81,6 @@
     </div>
 </aside>
 
-
-
 <!--------------------------------Ovan är om header ----------------------------------->
 
 <!-- HERO SECTION -->
@@ -99,7 +92,10 @@
         <h1>Välkommen till Anton's Skafferi!</h1>
         <div class="hero-sections">
             <div class="hero-box">
-                <h2 th:text="${'Dagens Lunch - ' + #dates.format(#dates.createNow(), 'EEEE')}">Dagens Lunch - Måndag:</h2>
+                <h2 th:text="${'Dagens Lunch - ' + #temporals.format(today, 'EEEE')}">Dagens Lunch - Måndag</h2>
+                <div th:if="${todayLunch == null || todayLunch.empty}">
+                    <p>Ingen lunch tillgänglig idag.</p>
+                </div>
                 <div th:each="item, itemStat : ${todayLunch}">
                     <p>
                         <strong th:text="${itemStat.index == 0 ? 'Lunchalternativ 1: ' :
@@ -118,14 +114,16 @@
     <h2>Veckans Lunch – Antons Skafferi</h2>
     <p class="menu-info">Lunch serveras alla dagar mellan 11:00 och 14:00.</p>
     <div class="menu-container">
-
-        <!-- Using hardcoded days but dynamic content -->
         <!-- Måndag -->
         <div class="day">
             <h3>Måndag</h3>
             <ul>
-                <li th:each="item : ${weeklyLunchMenu.get('Måndag')}">
+                <li th:if="${weeklyLunch != null && weeklyLunch.containsKey('Måndag')}"
+                    th:each="item : ${weeklyLunch.get('Måndag')}">
                     <strong th:text="${item.dish_name}">Dish Name</strong>
+                </li>
+                <li th:unless="${weeklyLunch != null && weeklyLunch.containsKey('Måndag')}">
+                    <em>Ingen lunch tillgänglig</em>
                 </li>
             </ul>
         </div>
@@ -134,8 +132,12 @@
         <div class="day">
             <h3>Tisdag</h3>
             <ul>
-                <li th:each="item : ${weeklyLunchMenu.get('Tisdag')}">
+                <li th:if="${weeklyLunch != null && weeklyLunch.containsKey('Tisdag')}"
+                    th:each="item : ${weeklyLunch.get('Tisdag')}">
                     <strong th:text="${item.dish_name}">Dish Name</strong>
+                </li>
+                <li th:unless="${weeklyLunch != null && weeklyLunch.containsKey('Tisdag')}">
+                    <em>Ingen lunch tillgänglig</em>
                 </li>
             </ul>
         </div>
@@ -144,8 +146,12 @@
         <div class="day">
             <h3>Onsdag</h3>
             <ul>
-                <li th:each="item : ${weeklyLunchMenu.get('Onsdag')}">
+                <li th:if="${weeklyLunch != null && weeklyLunch.containsKey('Onsdag')}"
+                    th:each="item : ${weeklyLunch.get('Onsdag')}">
                     <strong th:text="${item.dish_name}">Dish Name</strong>
+                </li>
+                <li th:unless="${weeklyLunch != null && weeklyLunch.containsKey('Onsdag')}">
+                    <em>Ingen lunch tillgänglig</em>
                 </li>
             </ul>
         </div>
@@ -154,8 +160,12 @@
         <div class="day">
             <h3>Torsdag</h3>
             <ul>
-                <li th:each="item : ${weeklyLunchMenu.get('Torsdag')}">
+                <li th:if="${weeklyLunch != null && weeklyLunch.containsKey('Torsdag')}"
+                    th:each="item : ${weeklyLunch.get('Torsdag')}">
                     <strong th:text="${item.dish_name}">Dish Name</strong>
+                </li>
+                <li th:unless="${weeklyLunch != null && weeklyLunch.containsKey('Torsdag')}">
+                    <em>Ingen lunch tillgänglig</em>
                 </li>
             </ul>
         </div>
@@ -164,8 +174,12 @@
         <div class="day">
             <h3>Fredag</h3>
             <ul>
-                <li th:each="item : ${weeklyLunchMenu.get('Fredag')}">
+                <li th:if="${weeklyLunch != null && weeklyLunch.containsKey('Fredag')}"
+                    th:each="item : ${weeklyLunch.get('Fredag')}">
                     <strong th:text="${item.dish_name}">Dish Name</strong>
+                </li>
+                <li th:unless="${weeklyLunch != null && weeklyLunch.containsKey('Fredag')}">
+                    <em>Ingen lunch tillgänglig</em>
                 </li>
             </ul>
         </div>
@@ -174,8 +188,12 @@
         <div class="day">
             <h3>Lördag</h3>
             <ul>
-                <li th:each="item : ${weeklyLunchMenu.get('Lördag')}">
+                <li th:if="${weeklyLunch != null && weeklyLunch.containsKey('Lördag')}"
+                    th:each="item : ${weeklyLunch.get('Lördag')}">
                     <strong th:text="${item.dish_name}">Dish Name</strong>
+                </li>
+                <li th:unless="${weeklyLunch != null && weeklyLunch.containsKey('Lördag')}">
+                    <em>Ingen lunch tillgänglig</em>
                 </li>
             </ul>
         </div>
@@ -184,8 +202,12 @@
         <div class="day">
             <h3>Söndag</h3>
             <ul>
-                <li th:each="item : ${weeklyLunchMenu.get('Söndag')}">
+                <li th:if="${weeklyLunch != null && weeklyLunch.containsKey('Söndag')}"
+                    th:each="item : ${weeklyLunch.get('Söndag')}">
                     <strong th:text="${item.dish_name}">Dish Name</strong>
+                </li>
+                <li th:unless="${weeklyLunch != null && weeklyLunch.containsKey('Söndag')}">
+                    <em>Ingen lunch tillgänglig</em>
                 </li>
             </ul>
         </div>
@@ -196,10 +218,11 @@
 <section id="alacarte" class="alacarte-menu">
     <h2>À La Carte</h2>
     <div class="alacarte-container">
-        <div th:each="category : ${categorizedMenu}" class="menu-category">
-            <h3 class="category-header" th:text="${category.key}">CATEGORY</h3>
+        <!-- Handling ArrayList of dishes instead of Map -->
+        <div th:if="${categorizedMenu != null && !categorizedMenu.empty}" class="menu-category">
+            <h3 class="category-header">Meny</h3>
             <div class="dish-list">
-                <div th:each="item : ${category.value}" class="dish-item">
+                <div th:each="item : ${categorizedMenu}" class="dish-item">
                     <div class="dish-header">
                         <strong class="dish-name" th:text="${item.DISH_NAME}">Dish Name</strong>
                         <span class="dish-price" th:text="${#numbers.formatDecimal(item.DISH_PRICE, 1, 2) + ' kr'}">Price</span>
@@ -208,9 +231,11 @@
                 </div>
             </div>
         </div>
+        <div th:if="${categorizedMenu == null || categorizedMenu.empty}" class="no-data-message">
+            <p>Menyn är inte tillgänglig för tillfället.</p>
+        </div>
     </div>
 </section>
-
 
 <section id="boka-bord" class="booking-section">
     <h2>Boka Bord</h2>
@@ -220,12 +245,12 @@
         <div class="date-time-panel">
             <div class="date-picker">
                 <h3>Välj ett datum</h3>
-                <input type="date" id="datum" required />
+                <input type="date" id="datum" required th:attr="min=${#temporals.format(today, 'yyyy-MM-dd')}" />
             </div>
             <div class="time-picker">
                 <h3>Tillgängliga tider</h3>
                 <div class="time-grid" id="timeGrid">
-                    <!-- Times will be added here dynamically -->
+                    <!-- Times will be added here dynamically by JavaScript -->
                 </div>
             </div>
         </div>
@@ -234,7 +259,7 @@
         <div class="table-selection">
             <h3>Välj bord</h3>
             <div class="table-grid" id="tableGrid">
-                <!-- Tables will be added here dynamically -->
+                <!-- Tables will be added here dynamically by JavaScript -->
             </div>
         </div>
 
@@ -310,7 +335,6 @@
     </div>
 </section>
 
-
 <section id="om-oss" class="about-section">
     <h2>OM OSS</h2>
     <div class="about-content">
@@ -326,18 +350,15 @@
                 kan du förvänta dig mat av högsta kvalitet och en service som får dig att känna dig som hemma.<br><br>
 
                 Vi ser fram emot att välkomna dig till Antons Skafferi – där varje måltid är en upplevelse!
-
             </p>
         </div>
 
         <!-- RIGHT COLUMN: Image -->
         <div class="about-image">
-
-            <img src="/images/omOss.jpg"alt="Restaurangbild" />
+            <img src="/images/omOss.jpg" alt="Restaurangbild" />
         </div>
     </div>
 </section>
-
 
 <!-- Footer -->
 <footer class="site-footer">
@@ -352,7 +373,7 @@
 
         <!-- Knappmeny -->
         <div class="footer-column footer-buttons">
-            <a href="#meno">Hem</a>
+            <a th:href="@{/}">Hem</a>
             <a href="#meno">Menu</a>
             <a href="#alacarte">A La Carte</a>
             <a href="#events">Evenemang</a>
@@ -372,66 +393,61 @@
 
     <!-- Copyright -->
     <div class="footer-bottom">
-        <p>&copy; 2025 Antons Skafferi. All Rights Reserved.</p>
+        <p>&copy; <span th:text="${#temporals.format(#temporals.createNow(), 'yyyy')}">2025</span> Antons Skafferi. All Rights Reserved.</p>
     </div>
-
 
     <!-- Tillbaka upp-knapp -->
     <button id="scrollToTopBtn" onclick="scrollToTop()">
         <span class="material-icons">arrow_upward</span>
     </button>
-
-
-    <script>
-        window.onscroll = function() { scrollFunction(); };
-
-        function scrollFunction() {
-            let scrollBtn = document.getElementById("scrollToTopBtn");
-
-            // Visa knappen om man scrollar ner mer än 300px
-            if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
-                scrollBtn.classList.add("show");
-            } else {
-                scrollBtn.classList.remove("show");
-            }
-        }
-
-        // Funktion för att scrolla upp
-        function scrollToTop() {
-            window.scrollTo({ top: 0, behavior: "smooth" });
-        }
-    </script>
-
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const menuToggle = document.getElementById("menuToggle");
-            const sideMenu = document.getElementById("sideMenu");
-            const closeMenu = document.getElementById("closeMenu");
-            const menuItems = document.querySelectorAll(".menu-item");
-
-            // Öppna sidomeny
-            menuToggle.addEventListener("click", function() {
-                sideMenu.style.left = "0";
-            });
-
-            // Stäng sidomeny (med X-knappen)
-            closeMenu.addEventListener("click", function() {
-                sideMenu.style.left = "-250px";
-            });
-
-            // Stäng sidomeny när en menyknapp klickas
-            menuItems.forEach(item => {
-                item.addEventListener("click", function() {
-                    sideMenu.style.left = "-250px";
-                });
-            });
-        });
-
-    </script>
-
-
 </footer>
 
-<script src="/js/booking.js"></script>
+<script>
+    window.onscroll = function() { scrollFunction(); };
+
+    function scrollFunction() {
+        let scrollBtn = document.getElementById("scrollToTopBtn");
+
+        // Visa knappen om man scrollar ner mer än 300px
+        if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+            scrollBtn.classList.add("show");
+        } else {
+            scrollBtn.classList.remove("show");
+        }
+    }
+
+    // Funktion för att scrolla upp
+    function scrollToTop() {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const menuToggle = document.getElementById("menuToggle");
+        const sideMenu = document.getElementById("sideMenu");
+        const closeMenu = document.getElementById("closeMenu");
+        const menuItems = document.querySelectorAll(".menu-item");
+
+        // Öppna sidomeny
+        menuToggle.addEventListener("click", function() {
+            sideMenu.style.left = "0";
+        });
+
+        // Stäng sidomeny (med X-knappen)
+        closeMenu.addEventListener("click", function() {
+            sideMenu.style.left = "-250px";
+        });
+
+        // Stäng sidomeny när en menyknapp klickas
+        menuItems.forEach(item => {
+            item.addEventListener("click", function() {
+                sideMenu.style.left = "-250px";
+            });
+        });
+    });
+</script>
+
+<script th:src="@{/js/booking.js}"></script>
 </body>
 </html>
