@@ -1,4 +1,4 @@
-DROP DATABASE RestaurantDB;
+DROP DATABASE IF EXISTS RestaurantDB;
 CREATE DATABASE RestaurantDB;
 USE RestaurantDB;
 
@@ -49,6 +49,7 @@ CREATE TABLE DISH (
                       DISH_PRICE DECIMAL(5,2),
                       FOREIGN KEY (DISH_TYPE_ID) REFERENCES DISH_TYPE(DISH_TYPE_ID)
 );
+[14:07]
 -- 7. Tabell för drycker
 CREATE TABLE DRINK (
                        DRINK_ID INT AUTO_INCREMENT PRIMARY KEY,
@@ -86,16 +87,15 @@ CREATE TABLE WORK_SHIFT (
                             FOREIGN KEY (EMPLOYEE_ID) REFERENCES EMPLOYEE(EMPLOYEE_ID)
 );
 
-
 -- 11. Tabell för bokningar
 CREATE TABLE BOOKING (
                          BOOKING_ID INT AUTO_INCREMENT PRIMARY KEY,
                          NAME VARCHAR(255) NOT NULL,
-                         EMAIL VARCHAR(255) NOT NULL,
-                         PHONE VARCHAR(20) NOT NULL,
-                         DATE DATE NOT NULL,
-                         TIME TIME NOT NULL,
-                         PEOPLE_COUNT INT NOT NULL,
-                         TABLE_NUMBER INT NOT NULL,
-                         CREATED_AT TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
+    EMAIL VARCHAR(255) NOT NULL,
+    PHONE VARCHAR(20) NOT NULL,
+    DATE DATE NOT NULL,
+    TIME TIME NOT NULL,
+    PEOPLE_COUNT INT NOT NULL,
+    TABLE_NUMBER INT NOT NULL,
+    CREATED_AT TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    );
