@@ -27,7 +27,7 @@ public class DishService {
         String sql =
                 "SELECT ld.LUNCH_DISH_NAME as dish_name, " +
                         "ld.LUNCH_DISH_PRICE as dish_price, " +
-                        "'Dagens lunch' as dish_description " +  // Adding a default description
+                        "ld.LUNCH_DISH_DESCRIPTION as dish_description " +
                         "FROM LUNCH_MENU lm " +
                         "JOIN LUNCH_DISH ld ON lm.LUNCH_ID = ld.LUNCH_ID " +
                         "WHERE DATE(lm.LUNCH_DATE) = CURRENT_DATE";
