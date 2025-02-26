@@ -102,7 +102,6 @@ public class Booking {
         String text = time.format(dtf);
         time = LocalTime.parse(text, dtf);
         return time;
-
     }
 
     public void setTime(LocalTime time) {

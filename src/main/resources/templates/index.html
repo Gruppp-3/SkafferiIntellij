@@ -214,15 +214,14 @@
     </div>
 </section>
 
-<!-- Database-driven À La Carte Menu Section -->
 <section id="alacarte" class="alacarte-menu">
     <h2>À La Carte</h2>
     <div class="alacarte-container">
-        <!-- Handling ArrayList of dishes instead of Map -->
-        <div th:if="${categorizedMenu != null && !categorizedMenu.empty}" class="menu-category">
-            <h3 class="category-header">Meny</h3>
+        <!-- Loop through each category -->
+        <div th:if="${categorizedMenu != null}" th:each="category : ${categorizedMenu.entrySet()}" class="menu-category">
+            <h3 class="category-header" th:text="${category.key}">Category Name</h3>
             <div class="dish-list">
-                <div th:each="item : ${categorizedMenu}" class="dish-item">
+                <div th:each="item : ${category.value}" class="dish-item">
                     <div class="dish-header">
                         <strong class="dish-name" th:text="${item.DISH_NAME}">Dish Name</strong>
                         <span class="dish-price" th:text="${#numbers.formatDecimal(item.DISH_PRICE, 1, 2) + ' kr'}">Price</span>
