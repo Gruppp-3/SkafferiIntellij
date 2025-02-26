@@ -174,15 +174,28 @@ SELECT 'Vegetarisk svamprisotto', 119.00, LUNCH_ID, 'Krämig risotto med skogsch
 FROM LUNCH_MENU WHERE LUNCH_DATE = '2025-03-02';
 
 -- 8. Sample Orders
-INSERT INTO ORDERS (ORDER_DATE, TABLE_NUMBER, IS_FINISHED) VALUES
-                                                               ('2025-02-24', 1, FALSE),
-                                                               ('2025-02-24', 2, TRUE);
+INSERT INTO ORDERS (ORDER_ID, TABLE_NUMBER, STATUS, ORDER_DATE)
+VALUES
+    (1, 5, 'ACTIVE', CURDATE()),  -- Table 5
+    (2, 3, 'ACTIVE', CURDATE()),  -- Table 3
+    (3, 7, 'ACTIVE', CURDATE());  -- Table 7
 
 -- 9. Sample Order Items
-INSERT INTO ORDER_DISH (ORDER_ID, DISH_ID, NOTE_TEXT, IS_DONE, IS_SERVED) VALUES
-                                                                              (1, 1, 'Extra sås', FALSE, FALSE),
-                                                                              (1, 2, 'Med extra ost', FALSE, FALSE),
-                                                                              (2, 4, 'Utan is', TRUE, TRUE);
+INSERT INTO ORDER_DISH (ORDER_ID, DISH_ID, NOTE_TEXT, IS_DONE, IS_SERVED, STATUS)
+VALUES
+    (1, 1, 'Extra sås', FALSE, FALSE, 'PENDING'),  -- Norrlands delikatesser
+    (1, 2, 'Ingen lök', FALSE, FALSE, 'PENDING'),  -- Gravlax
+    (2, 3, 'Extra ost', FALSE, FALSE, 'PENDING'),  -- Västerbottenpaj
+    (2, 4, 'Med citron', FALSE, FALSE, 'IN_PROGRESS'),  -- Ugnsstekt Piggvar med pepparrotsskräm
+    (3, 5, 'Extra dill', TRUE, FALSE, 'READY'),  -- Forellfilé med citronmousse
+    (3, 6, 'Ingen citron', TRUE, TRUE, 'SERVED'),  -- Lax med Dillstuvad Potatis
+    (1, 7, 'Lägg till mer bröd', FALSE, FALSE, 'PENDING'),  -- Älggryta med Rotfrukter
+    (2, 8, 'Ingen svampsås', FALSE, FALSE, 'IN_PROGRESS'),  -- Grönsaksbiffar med Svampsås
+    (3, 9, 'Extra timjan', FALSE, FALSE, 'PENDING'),  -- Svensk Rotfruktsgryta
+    (1, 10, 'Med extra grädde', FALSE, FALSE, 'PENDING'),  -- Kladdkaka med Grädde
+    (2, 11, 'Servera varm', FALSE, FALSE, 'IN_PROGRESS'),  -- Blåbärspaj med Vaniljsås
+    (3, 12, 'Dela på två personer', TRUE, TRUE, 'SERVED');  -- Glass surprís
+
 
 -- 10. Work Shifts
 INSERT INTO WORK_SHIFT (START_TIME, END_TIME, DESCRIPTION, EMPLOYEE_ID) VALUES

@@ -49,7 +49,7 @@ CREATE TABLE DISH (
                       DISH_PRICE DECIMAL(5,2),
                       FOREIGN KEY (DISH_TYPE_ID) REFERENCES DISH_TYPE(DISH_TYPE_ID)
 );
-[14:07]
+
 -- 7. Tabell för drycker
 CREATE TABLE DRINK (
                        DRINK_ID INT AUTO_INCREMENT PRIMARY KEY,
@@ -57,12 +57,13 @@ CREATE TABLE DRINK (
                        DRINK_PRICE DECIMAL(5,2)
 );
 
--- 8. Tabell för beställningar
+-- 8. Tabell för beställda ordrar
 CREATE TABLE ORDERS (
                         ORDER_ID INT AUTO_INCREMENT PRIMARY KEY,
                         ORDER_DATE DATE,
                         TABLE_NUMBER INT,
-                        IS_FINISHED BOOLEAN
+                        IS_FINISHED BOOLEAN,
+                        STATUS VARCHAR(50) DEFAULT 'ACTIVE'  -- ✅Ny status kolumn för order
 );
 
 -- 9. Tabell för beställda rätter
@@ -73,9 +74,12 @@ CREATE TABLE ORDER_DISH (
                             NOTE_TEXT VARCHAR(100),
                             IS_DONE BOOLEAN,
                             IS_SERVED BOOLEAN,
-                            FOREIGN KEY (ORDER_ID) REFERENCES ORDERS(ORDER_ID),
+                            STATUS VARCHAR(50) DEFAULT 'PENDING',  -- Ny kolumn för individuell rätt, PENDING eller DONE
+                            FOREIGN KEY (ORDER_ID) REFERENCES ORDERS(ORDER_ID) ON DELETE CASCADE,
                             FOREIGN KEY (DISH_ID) REFERENCES DISH(DISH_ID)
 );
+
+
 
 -- 10. Tabell för arbetspass
 CREATE TABLE WORK_SHIFT (

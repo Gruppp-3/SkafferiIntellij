@@ -35,8 +35,14 @@ public class MenuApiController {
 
     @PostMapping
     public ResponseEntity<Map<String, Object>> addMenuItem(@RequestBody Map<String, Object> menuItem) {
-        // TODO: Implement addMenuItem in DishService
-        return ResponseEntity.ok().build();
+        try {
+            Map<String, Object> savedItem = dishService.addMenuItem(menuItem);
+            return ResponseEntity.ok(savedItem);
+        } catch (Exception e) {
+            // Log the error
+            e.printStackTrace();
+            return ResponseEntity.badRequest().build();
+        }
     }
 
     @PutMapping("/{id}")

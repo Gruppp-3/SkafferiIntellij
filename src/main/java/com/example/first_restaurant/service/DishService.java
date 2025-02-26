@@ -64,4 +64,83 @@ public class DishService {
         String[] days = {"Söndag", "Måndag", "Tisdag", "Onsdag", "Torsdag", "Fredag", "Lördag"};
         return days[calendar.get(Calendar.DAY_OF_WEEK) - 1];
     }
+
+    // Add this method to your DishService class
+
+    public Map<String, Object> addMenuItem(Map<String, Object> menuItem) {
+        try {
+            // Extract values from the menuItem map
+            String name = (String) menuItem.get("dish_name");
+            String description = (String) menuItem.get("dish_description");
+            String dishType = (String) menuItem.get("dish_type");
+            Double price = Double.valueOf(menuItem.get("dish_price").toString());
+
+            // Get the dish_type_id based on the dish_type
+            Integer dishTypeId = getDishTypeIdFromType(dishType);
+
+            // SQL to insert new dish
+            String sql = "INSERT INTO dish (dish_name, dish_description, dish_type_id, dish_price) " +
+                    "VALUES (?, ?, ?, ?)";
+
+            // Execute update
+            jdbcTemplate.update(sql, name, description, dishTypeId, price);
+
+            // Create a map for the response
+            Map<String, Object> savedItem = new HashMap<>(menuItem);
+            savedItem.put("status", "success");
+
+            return savedItem;
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw e; // Re-throw to be handled by controller
+        }
+    }
+
+    private Integer getDishTypeIdFromType(String dishType) {
+        // Map API dish type values to database dish type IDs
+        String dishTypeName;
+        switch(dishType) {
+            case "APPETIZER":
+                dishTypeName = "Förrätter";
+                break;
+            case "MAIN":
+                dishTypeName = "Varmrätter";
+                break;
+            case "DESSERT":
+                dishTypeName = "Efterrätter";
+                break;
+            case "DRINK":
+                dishTypeName = "Drycker";
+                break;
+            case "VEGETARIAN":
+                dishTypeName = "Vegetariska";
+                break;
+            default:
+                dishTypeName = "Övrigt";
+        }
+
+        // Query to get dish type ID
+        String sql = "SELECT dish_type_id FROM dish_type WHERE dish_type_name = ?";
+        try {
+            return jdbcTemplate.queryForObject(sql, Integer.class, dishTypeName);
+        } catch (Exception e) {
+            // If the dish type doesn't exist, log and return a default
+            System.err.println("Dish type not found: " + dishTypeName);
+            // You could create the dish type here if needed
+            return getDefaultDishTypeId();
+        }
+    }
+
+    private Integer getDefaultDishTypeId() {
+        // Get the first dish type ID or a default one
+        try {
+            return jdbcTemplate.queryForObject(
+                    "SELECT dish_type_id FROM dish_type LIMIT 1",
+                    Integer.class
+            );
+        } catch (Exception e) {
+            // If no dish types exist, return a reasonable default (may need adjustment)
+            return 1;
+        }
+    }
 }

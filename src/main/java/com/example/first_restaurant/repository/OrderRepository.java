@@ -7,8 +7,12 @@ import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface OrderRepository extends JpaRepository<Order, Long> {
     List<Order> findByOrderDateAndIsFinished(LocalDate orderDate, Boolean isFinished);
+
+    // NEW FUNCTION FOR KITCHEN APP
+    Optional<Order> findByOrderDishes_Id(Long orderDishId);
 }
