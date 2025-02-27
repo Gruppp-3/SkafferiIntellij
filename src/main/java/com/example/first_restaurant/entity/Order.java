@@ -1,5 +1,6 @@
 package com.example.first_restaurant.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
@@ -25,6 +26,7 @@ public class Order {
     private Boolean isFinished;
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
     private List<OrderDish> orderDishes;
 
     // Getters and Setters

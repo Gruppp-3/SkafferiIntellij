@@ -2,6 +2,9 @@ package com.example.first_restaurant.entity;
 import jakarta.persistence.*;
 
 import java.util.List;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import jakarta.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "DISH_TYPE")
@@ -15,6 +18,7 @@ public class DishType {
     private String name;
 
     @OneToMany(mappedBy = "dishType")
+    @JsonManagedReference
     private List<Dish> dishes;
 
     // Getters and Setters
@@ -41,5 +45,4 @@ public class DishType {
     public void setId(Long id) {
         this.id = id;
     }
-
 }

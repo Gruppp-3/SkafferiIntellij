@@ -2,6 +2,9 @@ package com.example.first_restaurant.entity;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import jakarta.persistence.*;
+import java.math.BigDecimal;
 
 @Entity
 @Table(name = "DISH")
@@ -19,6 +22,7 @@ public class Dish {
 
     @ManyToOne
     @JoinColumn(name = "DISH_TYPE_ID")
+    @JsonBackReference
     private DishType dishType;
 
     @Column(name = "DISH_PRICE")
