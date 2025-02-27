@@ -12,6 +12,9 @@ public class Order {
     @Column(name = "ORDER_ID")
     private Long id;
 
+    @Column(name = "STATUS")
+    private String status;
+
     @Column(name = "ORDER_DATE")
     private LocalDate orderDate;
 
@@ -21,10 +24,11 @@ public class Order {
     @Column(name = "IS_FINISHED")
     private Boolean isFinished;
 
-    @OneToMany(mappedBy = "order")
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<OrderDish> orderDishes;
 
     // Getters and Setters
+
     public Long getId() {
         return id;
     }
@@ -63,5 +67,13 @@ public class Order {
 
     public void setOrderDishes(List<OrderDish> orderDishes) {
         this.orderDishes = orderDishes;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }
