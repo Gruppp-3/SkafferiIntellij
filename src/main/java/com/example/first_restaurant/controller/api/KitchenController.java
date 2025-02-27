@@ -25,7 +25,7 @@ public class KitchenController {
     @PutMapping("/order-dish/{orderDishId}/status")
     public ResponseEntity<Void> updateOrderDishStatus(
             @PathVariable Long orderDishId, @RequestParam String status) {
-        kitchenService.updateOrderDishStatus(orderDishId, status);
+        //kitchenService.updateOrderDishStatus(orderDishId, status);
         return ResponseEntity.ok().build();
     }
 }

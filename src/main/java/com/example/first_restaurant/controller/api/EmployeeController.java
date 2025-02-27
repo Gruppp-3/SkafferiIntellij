@@ -1,4 +1,4 @@
-package com.example.first_restaurant.controller;
+package com.example.first_restaurant.controller.api;
 
 import com.example.first_restaurant.entity.Employee;
 import com.example.first_restaurant.service.EmployeeService;

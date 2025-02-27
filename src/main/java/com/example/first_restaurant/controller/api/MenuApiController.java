@@ -49,13 +49,21 @@ public class MenuApiController {
     public ResponseEntity<Map<String, Object>> updateMenuItem(
             @PathVariable Long id,
             @RequestBody Map<String, Object> menuItem) {
-        // TODO: Implement updateMenuItem in DishService
         return ResponseEntity.ok().build();
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteMenuItem(@PathVariable Long id) {
-        // TODO: Implement deleteMenuItem in DishService
-        return ResponseEntity.ok().build();
+        try {
+            boolean deleted = dishService.deleteMenuItem(id);
+            if (deleted) {
+                return ResponseEntity.ok().build(); // 200 OK
+            } else {
+                return ResponseEntity.notFound().build(); // 404 Not Found
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(500).build(); // 500 Internal Server Error
+        }
     }
 }

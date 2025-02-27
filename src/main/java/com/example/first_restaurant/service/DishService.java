@@ -22,6 +22,24 @@ public class DishService {
         );
     }
 
+    /**
+     * Deletes a dish from the menu by ID
+     * @param id The ID of the dish to delete
+     * @return true if deletion was successful, false otherwise
+     */
+    public boolean deleteMenuItem(Long id) {
+        try {
+            String sql = "DELETE FROM dish WHERE dish_id = ?";
+            int rowsAffected = jdbcTemplate.update(sql, id);
+
+            // Return true if at least one row was affected (item was deleted)
+            return rowsAffected > 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
     // Method for today's lunch
     public List<Map<String, Object>> getTodayLunch() {
         String sql =

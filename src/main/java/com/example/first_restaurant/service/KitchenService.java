@@ -3,7 +3,7 @@ package com.example.first_restaurant.service;
 import com.example.first_restaurant.entity.Order;
 import com.example.first_restaurant.entity.Dish;
 import com.example.first_restaurant.entity.OrderDish;
-import com.example.first_restaurant.repository.OrderDishRepository;
+import com.example.first_restaurant.repository.OrderRepository;
 import com.example.first_restaurant.repository.DishRepository;
 import com.example.first_restaurant.repository.OrderRepository;
 import org.springframework.stereotype.Service;
@@ -38,16 +38,20 @@ public class KitchenService {
                 ))
                 .collect(Collectors.toList());
     }
-
+}
     /**
      * Update dish status (e.g., PENDING -> READY).
      */
+    /**
+
+    /*
     @Transactional
     public void updateOrderDishStatus(Long orderDishId, String status) {
+
         OrderDish orderDish = orderRepository.findById(orderDishId)
                 .orElseThrow(() -> new RuntimeException("OrderDish not found"));
 
         orderDish.setStatus(status);
         orderRepository.save(orderDish);
     }
-}
+} */
