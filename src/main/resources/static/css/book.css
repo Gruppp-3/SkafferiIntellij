@@ -29,7 +29,7 @@
 /* Vänster kolumn: Datum och tider */
 .date-time-panel {
     background-color: #fff;
-    padding: 5rem;
+    padding: 3rem;
     border-radius: 8px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
@@ -46,19 +46,19 @@
     padding: 0.8rem;
     border-radius: 4px;
     border: 1px solid #ccc;
-    width: 95%;
+    width: 100%;
     font-size: 1rem;
 }
 
-/* Tid-knappar och Bordsknappar */
-.time-grid, .table-grid {
+/* Tid-knappar */
+.time-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 0.5rem;
     margin-top: 1rem;
 }
 
-.time-btn, .table-btn {
+.time-btn {
     padding: 0.8rem;
     background-color: #1B2845;
     color: white;
@@ -68,35 +68,20 @@
     transition: background-color 0.3s ease;
 }
 
-.time-btn:hover, .table-btn:hover {
+.time-btn:hover {
     background-color: #27445D;
 }
 
-.time-btn.selected, .table-btn.selected {
-    background-color: #27445D;
+.time-btn.selected {
+    background-color: #008000 ;
     border: 2px solid #fff;
     box-shadow: 0 0 10px rgba(39, 68, 93, 0.5);
-}
-
-/* Table Selection Section */
-.table-selection {
-    background-color: #fff;
-    padding: 5rem;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-}
-
-.table-selection h3 {
-    font-size: 1.5rem;
-    color: #1B2845;
-    margin-bottom: 1rem;
-    font-weight: bold;
 }
 
 /* Höger kolumn: Bokningsformulär */
 .booking-form {
     background-color: #fff;
-    padding: 5rem;
+    padding: 3rem;
     border-radius: 8px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     display: flex;
@@ -123,7 +108,7 @@
     padding: 0.8rem;
     border-radius: 4px;
     border: 1px solid #ccc;
-    width: auto;
+    width: 100%;
     font-size: 1rem;
 }
 
@@ -184,53 +169,12 @@
         font-size: 1rem;
     }
 
-    .time-grid, .table-grid {
+    .time-grid {
         grid-template-columns: repeat(2, 1fr);
     }
 }
 
-/* New table styling */
-.table-btn {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 1rem;
-}
-
-.table-btn.booked {
-    background-color: #dc3545;
-    opacity: 0.7;
-    cursor: not-allowed;
-}
-
-.table-btn.too-small {
-    background-color: #ffc107;
-    opacity: 0.7;
-    cursor: not-allowed;
-}
-
-.table-btn .table-location {
-    font-size: 0.8rem;
-    opacity: 0.8;
-}
-
-.table-btn .booked-label {
-    font-size: 0.8rem;
-    font-weight: bold;
-    color: #fff;
-    background-color: rgba(0,0,0,0.2);
-    padding: 0.2rem 0.5rem;
-    border-radius: 3px;
-}
-
-.time-btn.fully-booked {
-    background-color: #dc3545;
-    opacity: 0.7;
-    cursor: not-allowed;
-}
-
-/* Status message styling */
+/* Statusmeddelanden */
 #bookingStatus {
     padding: 1rem;
     margin-top: 1rem;

@@ -10,6 +10,5 @@ import java.util.List;
 public interface LunchDishRepository extends JpaRepository<LunchDish, Long> {
     List<LunchDish> findByLunchMenuId(Long menuId);
 
-    // New method to fetch dishes for multiple menus
     List<LunchDish> findByLunchMenuIdIn(List<Long> menuIds);
 }

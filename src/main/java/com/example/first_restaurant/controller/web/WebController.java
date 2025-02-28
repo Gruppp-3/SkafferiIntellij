@@ -11,7 +11,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 @Controller
@@ -28,15 +27,13 @@ public class WebController {
 
     @GetMapping("/")
     public String home(Model model) {
-        // Get lunch menus
         List<Map<String, Object>> todayLunch = dishService.getTodayLunch();
         Map<String, List<Map<String, Object>>> weeklyLunch = dishService.getWeeklyLunchMenu();
 
         model.addAttribute("todayLunch", todayLunch);
-        model.addAttribute("weeklyLunch", weeklyLunch);
+        model.addAttribute("weeklyLunchMenu", weeklyLunch);
         model.addAttribute("today", LocalDate.now());
 
-        // Get a la carte menu and categorize it
         List<Map<String, Object>> allDishes = dishService.getMenuByCategory();
         Map<String, List<Map<String, Object>>> categorizedMenu = new LinkedHashMap<>();
 
@@ -50,19 +47,11 @@ public class WebController {
         return "index";
     }
 
-    // Simple booking endpoints for AJAX calls
     @GetMapping("/api/bookings/availability")
     @ResponseBody
     public List<String> getAvailability(@RequestParam String date) {
         LocalDate parsedDate = LocalDate.parse(date);
         return bookingService.getAvailableTimeSlots(parsedDate);
-    }
-
-    @GetMapping("/api/bookings/booked-tables")
-    @ResponseBody
-    public Map<String, List<Integer>> getBookedTables(@RequestParam String date) {
-        LocalDate parsedDate = LocalDate.parse(date);
-        return bookingService.getBookedTablesForDate(parsedDate);
     }
 
     @PostMapping("/api/bookings")

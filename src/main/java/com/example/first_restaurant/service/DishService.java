@@ -9,7 +9,7 @@ public class DishService {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
-    // Method for à la carte menu
+
     public List<Map<String, Object>> getMenuByCategory() {
         return jdbcTemplate.queryForList(
                 "SELECT d.dish_name as DISH_NAME, " +
@@ -32,7 +32,7 @@ public class DishService {
             String sql = "DELETE FROM dish WHERE dish_id = ?";
             int rowsAffected = jdbcTemplate.update(sql, id);
 
-            // Return true if at least one row was affected (item was deleted)
+
             return rowsAffected > 0;
         } catch (Exception e) {
             e.printStackTrace();
@@ -58,7 +58,7 @@ public class DishService {
         String sql =
                 "SELECT ld.LUNCH_DISH_NAME as dish_name, " +
                         "ld.LUNCH_DISH_PRICE as dish_price, " +
-                        "'Veckans lunch' as dish_description, " +  // Adding a default description
+                        "'Veckans lunch' as dish_description, " +
                         "lm.LUNCH_DATE as menu_date " +
                         "FROM LUNCH_MENU lm " +
                         "JOIN LUNCH_DISH ld ON lm.LUNCH_ID = ld.LUNCH_ID " +
@@ -83,7 +83,7 @@ public class DishService {
         return days[calendar.get(Calendar.DAY_OF_WEEK) - 1];
     }
 
-    // Add this method to your DishService class
+
 
     public Map<String, Object> addMenuItem(Map<String, Object> menuItem) {
         try {
@@ -93,29 +93,27 @@ public class DishService {
             String dishType = (String) menuItem.get("dish_type");
             Double price = Double.valueOf(menuItem.get("dish_price").toString());
 
-            // Get the dish_type_id based on the dish_type
+
             Integer dishTypeId = getDishTypeIdFromType(dishType);
 
-            // SQL to insert new dish
+
             String sql = "INSERT INTO dish (dish_name, dish_description, dish_type_id, dish_price) " +
                     "VALUES (?, ?, ?, ?)";
 
-            // Execute update
             jdbcTemplate.update(sql, name, description, dishTypeId, price);
 
-            // Create a map for the response
             Map<String, Object> savedItem = new HashMap<>(menuItem);
             savedItem.put("status", "success");
 
             return savedItem;
         } catch (Exception e) {
             e.printStackTrace();
-            throw e; // Re-throw to be handled by controller
+            throw e;
         }
     }
 
     private Integer getDishTypeIdFromType(String dishType) {
-        // Map API dish type values to database dish type IDs
+
         String dishTypeName;
         switch(dishType) {
             case "APPETIZER":
@@ -137,7 +135,7 @@ public class DishService {
                 dishTypeName = "Övrigt";
         }
 
-        // Query to get dish type ID
+
         String sql = "SELECT dish_type_id FROM dish_type WHERE dish_type_name = ?";
         try {
             return jdbcTemplate.queryForObject(sql, Integer.class, dishTypeName);

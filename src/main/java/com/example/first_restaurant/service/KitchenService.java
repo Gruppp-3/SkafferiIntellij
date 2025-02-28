@@ -1,17 +1,15 @@
 package com.example.first_restaurant.service;
 
+import com.example.first_restaurant.entity.OrderSpecs;
 import com.example.first_restaurant.entity.Order;
 import com.example.first_restaurant.entity.Dish;
-import com.example.first_restaurant.entity.OrderDish;
+import com.example.first_restaurant.entity.RecievedOrder;
 import com.example.first_restaurant.repository.OrderRepository;
 import com.example.first_restaurant.repository.DishRepository;
-import com.example.first_restaurant.repository.OrderRepository;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+
 import java.time.LocalDate;
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
+import java.util.*;
 
 @Service
 public class KitchenService {
@@ -19,39 +17,73 @@ public class KitchenService {
     private final OrderRepository orderRepository;
     private final DishRepository dishRepository;
 
-
     public KitchenService(OrderRepository orderRepository, DishRepository dishRepository) {
         this.orderRepository = orderRepository;
         this.dishRepository = dishRepository;
     }
 
     /**
-     * Fetch all active orders for today's date.
+     * Saves an order received from the waiter.
+     *
+     * @param recOrder The received order details.
+     * @return The saved Order object.
      */
-    public List<Map<String, Object>> getActiveOrders() {
-        List<Order> activeOrders = orderRepository.findByOrderDateAndIsFinished(LocalDate.now(), false);
-        return activeOrders.stream()
-                .map(order -> Map.of(
-                        "orderId", order.getId(),
-                        "tableNumber", order.getTableNumber(),
-                        "dishes", order.getOrderDishes()
-                ))
-                .collect(Collectors.toList());
+    public Order saveOrder(RecievedOrder recOrder) {
+        Order order = new Order();
+        order.setTableNumber(recOrder.getTableNumber());
+        order.setOrderDate(LocalDate.now());
+        order.setIsFinished(recOrder.getIsFinished());
+        orderRepository.save(order);
+
+        System.out.println(recOrder.getOrderSpecs().size());
+
+        for (OrderSpecs specs : recOrder.getOrderSpecs()) {
+            Dish dish = new Dish();
+            dish.setOrderID(order.getId());
+            dish.setCategory(specs.getCategory());
+            dish.setDish_name(specs.getMeal());
+            dish.setDish_count(specs.getCount());
+            dishRepository.save(dish);
+        }
+        return order;
+    }
+
+    /**
+     * Fetches all active (unfinished) orders and their associated dishes.
+     *
+     * @return A list of RecievedOrder objects containing order and dish details.
+     */
+    public List<RecievedOrder> getActiveOrders() {
+        List<RecievedOrder> recievedOrdersList = new ArrayList<>();
+        List<Order> orderList = orderRepository.findAllByIsFinishedIsFalse();
+
+        for (Order order : orderList) {
+            List<Dish> dishList = dishRepository.findAllByOrderID(order.getId());
+
+
+            System.out.println("Order från bord " + order.getTableNumber() + " innehåller: " + dishList.size() + " rätter.");
+
+            RecievedOrder recievedOrder = new RecievedOrder();
+            recievedOrder.setTableNumber(order.getTableNumber());
+            recievedOrder.setIsFinished(order.getIsFinished());
+            recievedOrder.setOrderSpecs(new ArrayList<>());
+
+            for (Dish dish : dishList) {
+                OrderSpecs orderSpecs = new OrderSpecs();
+                orderSpecs.setCategory(dish.getCategory());
+                orderSpecs.setMeal(dish.getDish_name());
+                orderSpecs.setCount(dish.getDish_count());
+
+
+                System.out.println("Lägger till rätt: " + dish.getDish_name() + " (Kategori: " + dish.getCategory() + ", Antal: " + dish.getDish_count() + ")");
+
+                recievedOrder.getOrderSpecs().add(orderSpecs);
+            }
+
+            recievedOrdersList.add(recievedOrder);
+        }
+
+        System.out.println("Totalt skickade beställningar: " + recievedOrdersList.size());
+        return recievedOrdersList;
     }
 }
-    /**
-     * Update dish status (e.g., PENDING -> READY).
-     */
-    /**
-
-    /*
-    @Transactional
-    public void updateOrderDishStatus(Long orderDishId, String status) {
-
-        OrderDish orderDish = orderRepository.findById(orderDishId)
-                .orElseThrow(() -> new RuntimeException("OrderDish not found"));
-
-        orderDish.setStatus(status);
-        orderRepository.save(orderDish);
-    }
-} */

@@ -4,63 +4,40 @@ import jakarta.persistence.*;
 import java.math.BigDecimal;
 
 @Entity
-@Table(name = "DISH")
+@Table(name = "ORDER_DISH")
 public class Dish {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "DISH_ID")
+    @Column(name = "ORDER_DISH_ID")
     private Long id;
 
+    @Column(name = "ORDER_ID")
+    private Long orderID;
+    @Column(name = "CATEGORY")
+    private String category;
+
     @Column(name = "DISH_NAME")
-    private String name;
+    private String dish_name;
 
-    @Column(name = "DISH_DESCRIPTION")
-    private String description;
+    @Column(name = "DISH_COUNT")
+    private Integer dish_count;
 
-    @ManyToOne
-    @JoinColumn(name = "DISH_TYPE_ID")
-    private DishType dishType;
+    public Long getId(){return id;}
+    public Long getOrderID(){return orderID;}
+    public String getCategory(){return category;}
+    public String getDish_name(){return dish_name;}
+    public Integer getDish_count(){return dish_count;}
 
-    @Column(name = "DISH_PRICE")
-    private BigDecimal price;
-
-    public String getName() {
-        return name;
+    public void setOrderID(Long orderID){
+        this.orderID=orderID;
     }
-
-    public void setName(String name) {
-        this.name = name;
+    public void setCategory(String category){
+        this.category=category;
     }
-
-    public Long getId() {
-        return id;
+    public void setDish_name(String dish_name){
+        this.dish_name=dish_name;
     }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public DishType getDishType() {
-        return dishType;
-    }
-
-    public void setDishType(DishType dishType) {
-        this.dishType = dishType;
-    }
-
-    public BigDecimal getPrice() {
-        return price;
-    }
-
-    public void setPrice(BigDecimal price) {
-        this.price = price;
+    public void setDish_count(Integer dish_count){
+        this.dish_count=dish_count;
     }
 }

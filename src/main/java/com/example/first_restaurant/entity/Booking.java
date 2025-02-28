@@ -98,7 +98,7 @@ public class Booking {
     public LocalTime getTime() {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm");
 
-        // Vi vill ha tiden på HH:MM inte HH:MM:SS
+
         String text = time.format(dtf);
         time = LocalTime.parse(text, dtf);
         return time;

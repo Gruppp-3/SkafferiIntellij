@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.Optional;
 
 
-// Service Classes
 @Service
 @Transactional
 public class EmployeeService {
@@ -24,7 +23,7 @@ public class EmployeeService {
     public Employee saveEmployee(Employee employee) {
         return employeeRepository.save(employee);
     }
-    // May be nullptr
+
     public Optional<Employee> getEmployeeById(Long id) {
         return employeeRepository.findById(id);
     }

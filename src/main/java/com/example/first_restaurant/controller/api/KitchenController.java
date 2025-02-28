@@ -1,11 +1,11 @@
 package com.example.first_restaurant.controller.api;
-
+import com.example.first_restaurant.entity.Order;
+import com.example.first_restaurant.entity.RecievedOrder;
 import com.example.first_restaurant.service.KitchenService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/api/kitchen")
@@ -17,11 +17,14 @@ public class KitchenController {
         this.kitchenService = kitchenService;
     }
 
+    @PostMapping("/orders")
+    public ResponseEntity<Order> sendOrders(@RequestBody RecievedOrder recOrder) {
+        return ResponseEntity.ok(kitchenService.saveOrder(recOrder));
+    }
     @GetMapping("/orders")
-    public ResponseEntity<List<Map<String, Object>>> getActiveOrders() {
+    public ResponseEntity<List<RecievedOrder>> getActiveOrders() {
         return ResponseEntity.ok(kitchenService.getActiveOrders());
     }
-
     @PutMapping("/order-dish/{orderDishId}/status")
     public ResponseEntity<Void> updateOrderDishStatus(
             @PathVariable Long orderDishId, @RequestParam String status) {

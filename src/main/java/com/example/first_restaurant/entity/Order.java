@@ -12,17 +12,13 @@ public class Order {
     @Column(name = "ORDER_ID")
     private Long id;
 
+    @Column(name = "TABLE_NUMBER")
+    private Integer tableNumber;
     @Column(name = "ORDER_DATE")
     private LocalDate orderDate;
 
-    @Column(name = "TABLE_NUMBER")
-    private Integer tableNumber;
-
     @Column(name = "IS_FINISHED")
     private Boolean isFinished;
-
-    @OneToMany(mappedBy = "order")
-    private List<OrderDish> orderDishes;
 
     // Getters and Setters
     public Long getId() {
@@ -57,11 +53,4 @@ public class Order {
         this.isFinished = isFinished;
     }
 
-    public List<OrderDish> getOrderDishes() {
-        return orderDishes;
-    }
-
-    public void setOrderDishes(List<OrderDish> orderDishes) {
-        this.orderDishes = orderDishes;
-    }
 }
