@@ -43,7 +43,6 @@ public class WebController {
         }
 
         model.addAttribute("categorizedMenu", categorizedMenu);
-
         return "index";
     }
 
