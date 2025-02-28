@@ -29,22 +29,45 @@ public class KitchenService {
      * @return The saved Order object.
      */
     public Order saveOrder(RecievedOrder recOrder) {
+        if (recOrder == null || recOrder.getOrderSpecs() == null || recOrder.getOrderSpecs().isEmpty()) {
+            throw new IllegalArgumentException("RecievedOrder eller orderSpecs är null/tomt!");
+        }
+
         Order order = new Order();
         order.setTableNumber(recOrder.getTableNumber());
         order.setOrderDate(LocalDate.now());
         order.setIsFinished(recOrder.getIsFinished());
-        orderRepository.save(order);
 
-        System.out.println(recOrder.getOrderSpecs().size());
+        try {
+            order = orderRepository.save(order);
+            System.out.println("Order sparad: ID = " + order.getId() + ", Bord = " + order.getTableNumber());
+        } catch (Exception e) {
+            System.err.println("Fel vid sparande av order i databasen: " + e.getMessage());
+            throw new RuntimeException("Databasfel vid sparande av order", e);
+        }
+
+        System.out.println("Antal beställda rätter: " + recOrder.getOrderSpecs().size());
 
         for (OrderSpecs specs : recOrder.getOrderSpecs()) {
+            if (specs.getMeal() == null || specs.getMeal().trim().isEmpty()) {
+                System.err.println("Varning: Tom maträttsnamn hittades i orderSpecs! Skippas.");
+                continue; // Hoppa över tomma rätter
+            }
+
             Dish dish = new Dish();
             dish.setOrderID(order.getId());
             dish.setCategory(specs.getCategory());
             dish.setDish_name(specs.getMeal());
             dish.setDish_count(specs.getCount());
-            dishRepository.save(dish);
+
+            try {
+                dishRepository.save(dish);
+                System.out.println("Rätt sparad: " + dish.getDish_name() + " (Kategori: " + dish.getCategory() + ", Antal: " + dish.getDish_count() + ")");
+            } catch (Exception e) {
+                System.err.println("Fel vid sparande av rätt i databasen: " + e.getMessage());
+            }
         }
+
         return order;
     }
 
@@ -57,9 +80,12 @@ public class KitchenService {
         List<RecievedOrder> recievedOrdersList = new ArrayList<>();
         List<Order> orderList = orderRepository.findAllByIsFinishedIsFalse();
 
+        if (orderList.isEmpty()) {
+            System.out.println("Inga aktiva beställningar hittades.");
+        }
+
         for (Order order : orderList) {
             List<Dish> dishList = dishRepository.findAllByOrderID(order.getId());
-
 
             System.out.println("Order från bord " + order.getTableNumber() + " innehåller: " + dishList.size() + " rätter.");
 
@@ -73,7 +99,6 @@ public class KitchenService {
                 orderSpecs.setCategory(dish.getCategory());
                 orderSpecs.setMeal(dish.getDish_name());
                 orderSpecs.setCount(dish.getDish_count());
-
 
                 System.out.println("Lägger till rätt: " + dish.getDish_name() + " (Kategori: " + dish.getCategory() + ", Antal: " + dish.getDish_count() + ")");
 
