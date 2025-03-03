@@ -40,4 +40,17 @@ public class KitchenController {
     public List<RecievedOrder> SendSignalToWaiter(){
         return kitchenService.sendToWaiter();
     }
+
+    // PUT-metod för att markera en order som levererad
+    @PutMapping("/orders/{tableNumber}/delivered")
+    public ResponseEntity<Void> markOrderDelivered(@PathVariable("tableNumber") int tableNumber) {
+        boolean isUpdated = kitchenService.markOrderAsDelivered(tableNumber);
+
+        if (isUpdated) {
+            return ResponseEntity.ok().build(); // Returnera 200 OK om ordern markerades som levererad
+        } else {
+            return ResponseEntity.status(404).build(); // Returnera 404 Not Found om ordern inte hittades
+        }
+    }
 }
+

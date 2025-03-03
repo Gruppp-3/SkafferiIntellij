@@ -136,4 +136,19 @@ public class KitchenService {
         System.out.println("Totalt skickade beställningar: " + recievedOrdersList.size());
         return recievedOrdersList;
     }
+
+
+    // Markera en order som levererad
+    public boolean markOrderAsDelivered(int tableNumber) {
+        Optional<Order> order = orderRepository.findByTableNumberAndIsFinishedFalse(tableNumber);
+
+        if (order.isPresent()) {
+            Order updatedOrder = order.get();
+            updatedOrder.setIsFinished(true);
+            orderRepository.save(updatedOrder);
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

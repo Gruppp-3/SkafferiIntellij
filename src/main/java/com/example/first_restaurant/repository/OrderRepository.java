@@ -15,4 +15,6 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
     List<Order> findOrderByIsFinishedFalse();
     List<Order> findAllByIsFinishedIsFalse();
     Order findOrderByIsFinishedFalseAndTableNumber(Integer tableNr);
+    Optional<Order> findByTableNumberAndIsFinishedFalse(int tableNumber);
+
 }
