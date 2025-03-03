@@ -22,11 +22,15 @@ public class Dish {
     @Column(name = "DISH_COUNT")
     private Integer dish_count;
 
+    @Column(name = "IS_FINISHED")
+    private Boolean isFinished;
+
     public Long getId(){return id;}
     public Long getOrderID(){return orderID;}
     public String getCategory(){return category;}
     public String getDish_name(){return dish_name;}
     public Integer getDish_count(){return dish_count;}
+    public Boolean getIsFinished(){return isFinished;}
 
     public void setOrderID(Long orderID){
         this.orderID=orderID;
@@ -40,4 +44,5 @@ public class Dish {
     public void setDish_count(Integer dish_count){
         this.dish_count=dish_count;
     }
+    public void setIsFinished(Boolean isFinished){this.isFinished=isFinished;}
 }

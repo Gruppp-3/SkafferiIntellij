@@ -1,6 +1,7 @@
 package com.example.first_restaurant.controller.api;
 import com.example.first_restaurant.entity.Order;
 import com.example.first_restaurant.entity.RecievedOrder;
+import com.example.first_restaurant.entity.SignalToWaiter;
 import com.example.first_restaurant.service.KitchenService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -30,5 +31,13 @@ public class KitchenController {
             @PathVariable Long orderDishId, @RequestParam String status) {
         //kitchenService.updateOrderDishStatus(orderDishId, status);
         return ResponseEntity.ok().build();
+    }
+    @PostMapping("/signal")
+    public void getSignalFromKitchen(@RequestParam("tableNr") Integer tableNr, @RequestParam("starter")Boolean starter, @RequestParam("main") Boolean main, @RequestParam("dessert") Boolean dessert){
+        kitchenService.getSignalFromKitchen(tableNr, starter, main, dessert);
+    }
+    @GetMapping("/orders/ready")
+    public List<RecievedOrder> SendSignalToWaiter(){
+        return kitchenService.sendToWaiter();
     }
 }
