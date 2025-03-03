@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Map;
 
+//Hej
 @RestController
 @RequestMapping("/api/v1/menu")
 public class MenuApiController {
@@ -49,8 +50,15 @@ public class MenuApiController {
     public ResponseEntity<Map<String, Object>> updateMenuItem(
             @PathVariable Long id,
             @RequestBody Map<String, Object> menuItem) {
-        return ResponseEntity.ok().build();
+        try {
+            Map<String, Object> updatedItem = dishService.updateMenuItem(id, menuItem);
+            return ResponseEntity.ok(updatedItem);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.badRequest().build();
+        }
     }
+
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteMenuItem(@PathVariable Long id) {

@@ -86,36 +86,6 @@ public class LunchService {
         lunchDishRepository.deleteById(id);
     }
 
-    // Creates (or resets) a weekly menu
-    public void createWeeklyMenu(Map<String, List<Map<String, Object>>> weeklyMenu, LocalDate startOfWeek) {
-        LocalDate endOfWeek = startOfWeek.plusDays(6);
-
-        // Clear existing menu for the week
-        List<LunchMenu> existingMenus = lunchMenuRepository.findByLunchDateBetween(startOfWeek, endOfWeek);
-        lunchMenuRepository.deleteAll(existingMenus);
-
-        // Create new menu for each day
-        for (Map.Entry<String, List<Map<String, Object>>> entry : weeklyMenu.entrySet()) {
-            String day = entry.getKey();
-            List<Map<String, Object>> dishes = entry.getValue();
-
-            // Create a menu for the day
-            LunchMenu menu = new LunchMenu();
-            menu.setLunchDate(startOfWeek.plusDays(getDayOffset(day)));
-            menu = lunchMenuRepository.save(menu);
-
-            // Add dishes to the menu
-            for (Map<String, Object> dishData : dishes) {
-                LunchDish dish = new LunchDish();
-                dish.setName((String) dishData.get("name"));
-                dish.setDescription((String) dishData.get("description"));
-                dish.setPrice(new BigDecimal(dishData.get("price").toString()));
-                dish.setLunchMenu(menu);
-                lunchDishRepository.save(dish);
-            }
-        }
-    }
-
     // Validates whether the given date falls within the upcoming week
     public boolean validateUpcomingDate(LocalDate requestedDate) {
         LocalDate nextMonday = LocalDate.now().with(TemporalAdjusters.next(DayOfWeek.MONDAY));
@@ -166,14 +136,5 @@ public class LunchService {
         map.put("dish_price", dish.getPrice());
         map.put("date", dish.getLunchMenu().getLunchDate().toString());
         return map;
-    }
-
-    private int getDayOffset(String day) {
-        for (int i = 0; i < SWEDISH_DAYS.length; i++) {
-            if (SWEDISH_DAYS[i].equals(day)) {
-                return i;
-            }
-        }
-        throw new IllegalArgumentException("Invalid day: " + day);
     }
 }
