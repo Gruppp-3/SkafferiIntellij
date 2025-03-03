@@ -57,29 +57,25 @@ CREATE TABLE DRINK (
                        DRINK_PRICE DECIMAL(5,2)
 );
 
--- 8. Tabell för beställda ordrar
+-- 8. Tabell för beställningar
 CREATE TABLE ORDERS (
                         ORDER_ID INT AUTO_INCREMENT PRIMARY KEY,
                         ORDER_DATE DATE,
                         TABLE_NUMBER INT,
-                        IS_FINISHED BOOLEAN,
-                        STATUS VARCHAR(50) DEFAULT 'ACTIVE'  -- ✅Ny status kolumn för order
+                        IS_FINISHED BOOLEAN
 );
 
 -- 9. Tabell för beställda rätter
 CREATE TABLE ORDER_DISH (
                             ORDER_DISH_ID INT AUTO_INCREMENT PRIMARY KEY,
                             ORDER_ID INT,
-                            DISH_ID INT,
-                            NOTE_TEXT VARCHAR(100),
-                            IS_DONE BOOLEAN,
-                            IS_SERVED BOOLEAN,
-                            STATUS VARCHAR(50) DEFAULT 'PENDING',  -- Ny kolumn för individuell rätt, PENDING eller DONE
-                            FOREIGN KEY (ORDER_ID) REFERENCES ORDERS(ORDER_ID) ON DELETE CASCADE,
-                            FOREIGN KEY (DISH_ID) REFERENCES DISH(DISH_ID)
+                            CATEGORY VARCHAR(20),
+                            DISH_NAME VARCHAR(100),
+                            DISH_COUNT INT,
+                            IS_FINISHED BOOLEAN,
+                            FOREIGN KEY (ORDER_ID) REFERENCES ORDERS(ORDER_ID) ON DELETE CASCADE
+
 );
-
-
 
 -- 10. Tabell för arbetspass
 CREATE TABLE WORK_SHIFT (
@@ -91,15 +87,17 @@ CREATE TABLE WORK_SHIFT (
                             FOREIGN KEY (EMPLOYEE_ID) REFERENCES EMPLOYEE(EMPLOYEE_ID)
 );
 
+
+
 -- 11. Tabell för bokningar
 CREATE TABLE BOOKING (
                          BOOKING_ID INT AUTO_INCREMENT PRIMARY KEY,
+    /*La till TABLE_NUMBER */
                          NAME VARCHAR(255) NOT NULL,
-    EMAIL VARCHAR(255) NOT NULL,
-    PHONE VARCHAR(20) NOT NULL,
-    DATE DATE NOT NULL,
-    TIME TIME NOT NULL,
-    PEOPLE_COUNT INT NOT NULL,
-    TABLE_NUMBER INT NOT NULL,
-    CREATED_AT TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-    );
+                         EMAIL VARCHAR(255) NOT NULL,
+                         PHONE VARCHAR(20) NOT NULL,
+                         DATE DATE NOT NULL,
+                         TIME TIME NOT NULL,
+                         PEOPLE_COUNT INT NOT NULL,
+                         CREATED_AT TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
