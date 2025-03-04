@@ -1,13 +1,12 @@
 package com.example.first_restaurant;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
+@SpringBootApplication
+class FirstRestaurantApplication {
 
-@SpringBootTest
-class FirstRestaurantApplicationTests {
-
-    @Test
-    void contextLoads() {
+    public static void main(String[] args) {
+        SpringApplication.run(FirstRestaurantApplication.class, args);
     }
 
 }
