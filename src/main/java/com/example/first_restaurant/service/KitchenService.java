@@ -81,22 +81,7 @@ public class KitchenService {
             recievedOrderList.add(order);
         }
         return recievedOrderList;
-        /*
-        List<SignalToWaiter> stwList = new ArrayList<>();
-        for(Order ord : orderList){
-            SignalToWaiter stw = new SignalToWaiter();
-            stw.setTableNr(ord.getTableNumber());
-            List<Dish> dishList = dishRepository.findAllByOrderID(ord.getId());
-            for(Dish dish : dishList){
-                if(dish.getIsFinished()){
-                    if("Förrätt".equalsIgnoreCase(dish.getCategory())){stw.setStarter(true);}
-                    if("Huvudrätt".equalsIgnoreCase(dish.getCategory())){stw.setMain(true);}
-                    if("Efterrätt".equalsIgnoreCase(dish.getCategory())){stw.setDessert(true);}
-                }
-            }
-            stwList.add(stw);
-        }
-        return stwList;*/
+
     }
     /**
      * Fetches all active (unfinished) orders and their associated dishes.
