@@ -47,9 +47,9 @@ public class KitchenController {
         boolean isUpdated = kitchenService.markOrderAsDelivered(tableNumber);
 
         if (isUpdated) {
-            return ResponseEntity.ok().build(); // Returnera 200 OK om ordern markerades som levererad
+            return ResponseEntity.ok().build();
         } else {
-            return ResponseEntity.status(404).build(); // Returnera 404 Not Found om ordern inte hittades
+            return ResponseEntity.status(404).build();
         }
     }
 }
