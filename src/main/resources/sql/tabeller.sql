@@ -63,6 +63,7 @@ CREATE TABLE ORDERS (
                         ORDER_DATE DATE,
                         TABLE_NUMBER INT,
                         IS_FINISHED BOOLEAN
+
 );
 
 -- 9. Tabell för beställda rätter
@@ -74,7 +75,6 @@ CREATE TABLE ORDER_DISH (
                             DISH_COUNT INT,
                             IS_FINISHED BOOLEAN,
                             FOREIGN KEY (ORDER_ID) REFERENCES ORDERS(ORDER_ID) ON DELETE CASCADE
-
 );
 
 -- 10. Tabell för arbetspass
@@ -92,7 +92,6 @@ CREATE TABLE WORK_SHIFT (
 -- 11. Tabell för bokningar
 CREATE TABLE BOOKING (
                          BOOKING_ID INT AUTO_INCREMENT PRIMARY KEY,
-    /*La till TABLE_NUMBER */
                          NAME VARCHAR(255) NOT NULL,
                          EMAIL VARCHAR(255) NOT NULL,
                          PHONE VARCHAR(20) NOT NULL,
@@ -101,3 +100,7 @@ CREATE TABLE BOOKING (
                          PEOPLE_COUNT INT NOT NULL,
                          CREATED_AT TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+
+
+

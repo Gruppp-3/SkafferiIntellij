@@ -15,6 +15,19 @@ public class DishService {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
+    // Ny funktion för WaiterApplication
+    public List<Map<String, Object>> getMenuByCategoryAndType(String category) {
+        String sql = "SELECT d.dish_name as DISH_NAME, " +
+                "d.dish_description as DISH_DESCRIPTION, " +
+                "d.dish_price as DISH_PRICE, " +
+                "dt.dish_type_name as DISH_TYPE_NAME " +
+                "FROM dish d " +
+                "JOIN dish_type dt ON d.dish_type_id = dt.dish_type_id " +
+                "WHERE dt.dish_type_name = ? " +
+                "ORDER BY d.dish_name";
+        return jdbcTemplate.queryForList(sql, category);
+    }
+
     // Method for à la carte menu
     public List<Map<String, Object>> getMenuByCategory() {
         logger.debug("Fetching menu by category...");

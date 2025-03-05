@@ -319,6 +319,7 @@ INSERT INTO LUNCH_DISH (LUNCH_DISH_NAME, LUNCH_DISH_DESCRIPTION, LUNCH_DISH_PRIC
 SELECT 'Vegetariska biffar med svampsås', 'Saftiga vegetariska biffar med krämig svampsås, serveras med rostad potatis och lingon', 125.00, LUNCH_ID
 FROM LUNCH_MENU WHERE LUNCH_DATE = '2025-03-09';
 
+
 -- Verify the lunch menu
 SELECT lm.LUNCH_DATE, ld.LUNCH_DISH_NAME, ld.LUNCH_DISH_DESCRIPTION, ld.LUNCH_DISH_PRICE
 FROM LUNCH_MENU lm

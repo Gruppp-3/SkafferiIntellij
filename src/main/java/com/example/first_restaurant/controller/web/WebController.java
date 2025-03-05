@@ -56,13 +56,22 @@ public class WebController {
     @PostMapping("/api/bookings")
     @ResponseBody
     public ResponseEntity<?> createBooking(@RequestBody Booking booking) {
+        System.out.println("Received Booking Request: " + booking); // Debug log
+
+        LocalDate today = LocalDate.now();
+        if (!booking.getDate().isAfter(today)) {
+            System.out.println("Booking failed: Date is not at least 24h ahead.");
+            return ResponseEntity.badRequest().body(Map.of("message", "Bokningar måste göras minst 24 timmar i förväg."));
+        }
+
         try {
             Booking createdBooking = bookingService.createBooking(booking);
+            System.out.println("Booking successful: " + createdBooking); // Debug log
             return ResponseEntity.ok(createdBooking);
         } catch (Exception e) {
-            Map<String, String> response = new HashMap<>();
-            response.put("message", e.getMessage());
-            return ResponseEntity.badRequest().body(response);
+            System.out.println("Booking error: " + e.getMessage());
+            return ResponseEntity.badRequest().body(Map.of("message", e.getMessage()));
         }
     }
+
 }

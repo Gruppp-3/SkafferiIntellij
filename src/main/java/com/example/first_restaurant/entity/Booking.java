@@ -20,10 +20,6 @@ public class Booking {
     @Column(name = "BOOKING_ID")
     private Integer bookingId;
 
-    // La till table i databasen och i klassen
-    @Column(name = "TABLE_NUMBER")
-    private Integer tableNumber;
-
     @Column(name = "NAME")
     private String name;
 
@@ -48,14 +44,6 @@ public class Booking {
     // Getters and Setters
     public Integer getBookingId() {
         return bookingId;
-    }
-
-    public Integer getTableNumber() {
-        return tableNumber;
-    }
-
-    public void setTableNumber(Integer tableNumber) {
-        this.tableNumber = tableNumber;
     }
 
 

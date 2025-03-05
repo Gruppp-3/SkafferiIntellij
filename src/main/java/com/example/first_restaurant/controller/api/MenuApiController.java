@@ -22,18 +22,6 @@ public class MenuApiController {
         return ResponseEntity.ok(menuItems);
     }
 
-    @GetMapping("/today")
-    public ResponseEntity<List<Map<String, Object>>> getTodayLunch() {
-        List<Map<String, Object>> todayLunch = dishService.getTodayLunch();
-        return ResponseEntity.ok(todayLunch);
-    }
-
-    @GetMapping("/weekly")
-    public ResponseEntity<Map<String, List<Map<String, Object>>>> getWeeklyLunch() {
-        Map<String, List<Map<String, Object>>> weeklyMenu = dishService.getWeeklyLunchMenu();
-        return ResponseEntity.ok(weeklyMenu);
-    }
-
     @PostMapping
     public ResponseEntity<Map<String, Object>> addMenuItem(@RequestBody Map<String, Object> menuItem) {
         try {

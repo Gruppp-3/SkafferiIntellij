@@ -8,8 +8,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
     let selectedTime = null;
 
-    // Sätt minimum datum till idag
+    // Set minimum booking date to tomorrow
     const today = new Date();
+    today.setDate(today.getDate() + 1);
     dateInput.min = today.toISOString().split('T')[0];
 
     async function displayAvailableTimes(date) {
@@ -44,8 +45,52 @@ document.addEventListener('DOMContentLoaded', function() {
         displayAvailableTimes(this.value);
     });
 
-    bookingForm.addEventListener('submit', async function(e) {
-        // Samma kod som ovan för att hantera bokning
+    bookingForm.addEventListener('submit', async function (e) {
+        e.preventDefault(); // Stop normal form submission
+
+        if (!selectedTime) {
+            statusDiv.textContent = 'Välj en tid innan du bokar.';
+            statusDiv.className = 'error';
+            return;
+        }
+
+        const bookingData = {
+            date: dateInput.value,
+            time: selectedTime,
+            name: document.getElementById('namn').value.trim(),
+            email: document.getElementById('email').value.trim(),
+            phone: document.getElementById('telefon').value.trim(),
+            peopleCount: parseInt(document.getElementById('antal').value)
+        };
+
+        console.log("Booking Data Sent:", bookingData); // Debug log
+
+        try {
+            const response = await fetch('/api/bookings', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(bookingData)
+            });
+
+            console.log("Response Status:", response.status);
+
+            const result = await response.json();
+            console.log("Response Data:", result);
+
+            if (response.ok) {
+                statusDiv.textContent = 'Bokning bekräftad!';
+                statusDiv.className = 'success';
+            } else {
+                statusDiv.textContent = `Fel: ${result.message}`;
+                statusDiv.className = 'error';
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            statusDiv.textContent = 'Kunde inte genomföra bokningen.';
+            statusDiv.className = 'error';
+        }
     });
 
     dateInput.value = today.toISOString().split('T')[0];

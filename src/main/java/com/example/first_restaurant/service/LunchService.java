@@ -41,11 +41,87 @@ public class LunchService {
         return getLunchForDateRange(startOfWeek, endOfWeek);
     }
 
-    // Returns the upcoming week's menu starting from next Monday
+    // In LunchService.java
+    public void createWeeklyMenu(Map<String, List<Map<String, Object>>> weeklyMenu, LocalDate startOfWeek) {
+        // Optionally, delete existing menus for the target week.
+        LocalDate endOfWeek = startOfWeek.plusDays(6);
+        List<LunchMenu> existingMenus = lunchMenuRepository.findByLunchDateBetween(startOfWeek, endOfWeek);
+        if (!existingMenus.isEmpty()) {
+            lunchMenuRepository.deleteAll(existingMenus);
+        }
+
+        // Iterate over each day entry in the payload.
+        for (Map.Entry<String, List<Map<String, Object>>> entry : weeklyMenu.entrySet()) {
+            String dayName = entry.getKey();
+            int offset = getDayOffsetForDay(dayName);
+            LocalDate menuDate = startOfWeek.plusDays(offset);
+            List<Map<String, Object>> dishes = entry.getValue();
+
+            // For each dish, add the computed date to the data and call addLunchDish(…)
+            for (Map<String, Object> dishData : dishes) {
+                dishData.put("date", menuDate.toString());
+                // Reuse your existing addLunchDish method.
+                addLunchDish(dishData);
+            }
+        }
+    }
+
+    // Helper method: Map a Swedish day name to an offset from the provided startOfWeek.
+    private int getDayOffsetForDay(String day) {
+        switch (day) {
+            case "Måndag": return 0;
+            case "Tisdag": return 1;
+            case "Onsdag": return 2;
+            case "Torsdag": return 3;
+            case "Fredag": return 4;
+            case "Lördag": return 5;
+            case "Söndag": return 6;
+            default: throw new IllegalArgumentException("Invalid day: " + day);
+        }
+    }
+
+
+    // Returns the upcoming week's menu (next Monday to Sunday)
+// If no upcoming menu exists, prepopulate by shifting the current week's menu by 7 days.
     public Map<String, List<Map<String, Object>>> getUpcomingWeekMenu() {
         LocalDate nextMonday = LocalDate.now().with(TemporalAdjusters.next(DayOfWeek.MONDAY));
         LocalDate endOfWeek = nextMonday.plusDays(6);
-        return getLunchForDateRange(nextMonday, endOfWeek);
+
+        // Get menus from the database for next week
+        Map<String, List<Map<String, Object>>> upcomingMenu = getLunchForDateRange(nextMonday, endOfWeek);
+
+        // Check if the upcoming menu is empty (all days have no dishes)
+        boolean isEmpty = true;
+        for (List<Map<String, Object>> dishes : upcomingMenu.values()) {
+            if (!dishes.isEmpty()) {
+                isEmpty = false;
+                break;
+            }
+        }
+
+        if (isEmpty) {
+            // If no menu exists for next week, fetch the current week's menu
+            Map<String, List<Map<String, Object>>> currentMenu = getWeeklyLunch();
+            Map<String, List<Map<String, Object>>> prepopulatedMenu = new HashMap<>();
+
+            // For each day in the current menu, shift the date by 7 days
+            for (String day : currentMenu.keySet()) {
+                List<Map<String, Object>> dishes = currentMenu.get(day);
+                List<Map<String, Object>> newDishes = new ArrayList<>();
+                for (Map<String, Object> dish : dishes) {
+                    Map<String, Object> newDish = new HashMap<>(dish);
+                    // Shift the dish's date forward by 7 days
+                    LocalDate currentDate = LocalDate.parse((String) dish.get("date"));
+                    LocalDate newDate = currentDate.plusWeeks(1);
+                    newDish.put("date", newDate.toString());
+                    newDishes.add(newDish);
+                }
+                prepopulatedMenu.put(day, newDishes);
+            }
+            return prepopulatedMenu;
+        }
+
+        return upcomingMenu;
     }
 
     // Adds a new lunch dish
