@@ -1,12 +1,13 @@
 package com.example.first_restaurant.entity;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
-import java.util.List;
-
-// Entity Classes
 @Entity
 @Table(name = "EMPLOYEE")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Employee {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "EMPLOYEE_ID")
@@ -24,8 +25,45 @@ public class Employee {
     @Column(name = "IS_ADMIN")
     private Boolean isAdmin;
 
-    @OneToMany(mappedBy = "employee")
-    private List<WorkShift> workShifts;
+    // Getters and setters
 
-    // Getters and Setters
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public Boolean getIsAdmin() {
+        return isAdmin;
+    }
+
+    public void setIsAdmin(Boolean isAdmin) {
+        this.isAdmin = isAdmin;
+    }
 }

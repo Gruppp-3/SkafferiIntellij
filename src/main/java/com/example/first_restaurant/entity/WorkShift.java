@@ -1,10 +1,12 @@
 package com.example.first_restaurant.entity;
+
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "WORK_SHIFT")
 public class WorkShift {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "WORK_SHIFT_ID")
@@ -23,8 +25,18 @@ public class WorkShift {
     @JoinColumn(name = "EMPLOYEE_ID")
     private Employee employee;
 
-    // Getters and Setters
+    @Enumerated(EnumType.STRING)
+    @Column(name = "SHIFT_STATUS")
+    private ShiftStatus shiftStatus = ShiftStatus.OPEN;
 
+    // Enum for shift status
+    public enum ShiftStatus {
+        OPEN,      // Shift is unassigned
+        ASSIGNED,  // Shift has been assigned to an employee
+        COMPLETED  // Shift has been completed
+    }
+
+    // Getters and setters
     public Long getId() {
         return id;
     }
@@ -65,4 +77,11 @@ public class WorkShift {
         this.employee = employee;
     }
 
+    public ShiftStatus getShiftStatus() {
+        return shiftStatus;
+    }
+
+    public void setShiftStatus(ShiftStatus shiftStatus) {
+        this.shiftStatus = shiftStatus;
+    }
 }

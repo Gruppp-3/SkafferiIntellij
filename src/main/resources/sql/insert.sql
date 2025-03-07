@@ -1,13 +1,26 @@
 USE RestaurantDB;
 
-USE RestaurantDB;
-
 -- 1. Employees
 INSERT INTO EMPLOYEE (FIRST_NAME, LAST_NAME, PHONE_NUMBER, IS_ADMIN) VALUES
                                                                          ('John', 'Doe', '1234567890', TRUE),
                                                                          ('Jane', 'Smith', '0987654321', FALSE);
 
--- 2. Dish Types
+-- 2. Employee Availability
+INSERT INTO EMPLOYEE_AVAILABILITY (EMPLOYEE_ID, DAY_OF_WEEK, START_TIME, END_TIME, PREFERENCE) VALUES
+                                                                                                   (1, 'MONDAY', '08:00:00', '16:00:00', 'PREFERRED'),
+                                                                                                   (1, 'TUESDAY', '08:00:00', '16:00:00', 'AVAILABLE'),
+                                                                                                   (1, 'WEDNESDAY', '08:00:00', '16:00:00', 'AVAILABLE'),
+                                                                                                   (1, 'THURSDAY', '08:00:00', '16:00:00', 'AVAILABLE'),
+                                                                                                   (1, 'FRIDAY', '08:00:00', '16:00:00', 'AVAILABLE'),
+                                                                                                   (2, 'MONDAY', '16:00:00', '23:00:00', 'AVAILABLE'),
+                                                                                                   (2, 'TUESDAY', '16:00:00', '23:00:00', 'AVAILABLE'),
+                                                                                                   (2, 'WEDNESDAY', '16:00:00', '23:00:00', 'PREFERRED'),
+                                                                                                   (2, 'THURSDAY', '16:00:00', '23:00:00', 'AVAILABLE'),
+                                                                                                   (2, 'FRIDAY', '16:00:00', '23:00:00', 'AVAILABLE'),
+                                                                                                   (2, 'SATURDAY', '12:00:00', '20:00:00', 'AVAILABLE'),
+                                                                                                   (2, 'SUNDAY', '12:00:00', '20:00:00', 'UNAVAILABLE');
+
+-- 3. Dish Types
 INSERT INTO DISH_TYPE (DISH_TYPE_NAME) VALUES
                                            ('Förrätter'),      -- ID: 1
                                            ('Varmrätter'),     -- ID: 2
@@ -15,41 +28,41 @@ INSERT INTO DISH_TYPE (DISH_TYPE_NAME) VALUES
                                            ('Efterrätter'),    -- ID: 4
                                            ('Drycker');        -- ID: 5
 
--- 3. Events
+-- 4. Events
 INSERT INTO EVENT (EVENT_DATE, EVENT_DESCRIPTION) VALUES
                                                       ('2025-02-27', 'Live Music Night'),
                                                       ('2025-03-15', 'Wine Tasting Event');
 
--- 4. A La Carte Dishes
+-- 5. A La Carte Dishes
 INSERT INTO DISH (DISH_NAME, DISH_DESCRIPTION, DISH_TYPE_ID, DISH_PRICE) VALUES
-                                                                             -- Starters (Förrätter)
-                                                                             ('Norrlands delikatesser', 'Torkad renfilé med enbärsgelé och frästa kantareller serveras med knäckebröd på rågsurdegsbröd.', 1, 85.00),
-                                                                             ('Gravlax', 'Tunt skivad gravad lax med hovmästarsås och färskt bröd.', 1, 75.00),
-                                                                             ('Västerbottenpaj', 'Västerbottenostpaj serverad med en klick gräddfil och lite gräslök.', 1, 70.00),
+-- Starters (Förrätter)
+('Norrlands delikatesser', 'Torkad renfilé med enbärsgelé och frästa kantareller serveras med knäckebröd på rågsurdegsbröd.', 1, 85.00),
+('Gravlax', 'Tunt skivad gravad lax med hovmästarsås och färskt bröd.', 1, 75.00),
+('Västerbottenpaj', 'Västerbottenostpaj serverad med en klick gräddfil och lite gräslök.', 1, 70.00),
 
-                                                                             -- Main Courses (Varmrätter)
-                                                                             ('Ugnsstekt Piggvar med pepparrotsskräm', 'Ugnsstekt piggvar, krämigt potatismos och pepparrotsskräm.', 2, 220.00),
-                                                                             ('Forellfilé med citronmousse', 'Stekta forellfiléer med citronmousse, serverad med potatispuré.', 2, 215.00),
-                                                                             ('Lax med Dillstuvad Potatis', 'Ugnsbakad lax med dillstuvad potatis och en citronklyfta.', 2, 195.00),
-                                                                             ('Älggryta med Rotfrukter', 'Långkokt älggryta med rotfrukter, serverad med nybakat bröd.', 2, 195.00),
+-- Main Courses (Varmrätter)
+('Ugnsstekt Piggvar med pepparrotsskräm', 'Ugnsstekt piggvar, krämigt potatismos och pepparrotsskräm.', 2, 220.00),
+('Forellfilé med citronmousse', 'Stekta forellfiléer med citronmousse, serverad med potatispuré.', 2, 215.00),
+('Lax med Dillstuvad Potatis', 'Ugnsbakad lax med dillstuvad potatis och en citronklyfta.', 2, 195.00),
+('Älggryta med Rotfrukter', 'Långkokt älggryta med rotfrukter, serverad med nybakat bröd.', 2, 195.00),
 
-                                                                             -- Vegetarian (Vegetariska)
-                                                                             ('Grönsaksbiffar med Svampsås', 'Grönsaksbiffar med krämig svampsås och ugnsrostad potatis.', 3, 160.00),
-                                                                             ('Svensk Rotfruktsgryta', 'Mustig gryta med rotfrukter och timjan, serverad med nybakat bröd.', 3, 160.00),
+-- Vegetarian (Vegetariska)
+('Grönsaksbiffar med Svampsås', 'Grönsaksbiffar med krämig svampsås och ugnsrostad potatis.', 3, 160.00),
+('Svensk Rotfruktsgryta', 'Mustig gryta med rotfrukter och timjan, serverad med nybakat bröd.', 3, 160.00),
 
-                                                                             -- Desserts (Efterrätter)
-                                                                             ('Kladdkaka med Grädde', 'Svensk chokladkaka serverad med vispgrädde.', 4, 55.00),
-                                                                             ('Blåbärspaj med Vaniljsås', 'Blåbärspaj serverad med varm vaniljsås.', 4, 65.00),
-                                                                             ('Glass surprís', 'En riktig glassbomb! Välj dina smaker! Utmärkt att dela på.', 4, 130.00);
+-- Desserts (Efterrätter)
+('Kladdkaka med Grädde', 'Svensk chokladkaka serverad med vispgrädde.', 4, 55.00),
+('Blåbärspaj med Vaniljsås', 'Blåbärspaj serverad med varm vaniljsås.', 4, 65.00),
+('Glass surprís', 'En riktig glassbomb! Välj dina smaker! Utmärkt att dela på.', 4, 130.00);
 
--- 5. Drinks
+-- 6. Drinks
 INSERT INTO DRINK (DRINK_NAME, DRINK_PRICE) VALUES
                                                 ('Kaffe eller Te', 25.00),
                                                 ('Lingondricka', 30.00),
                                                 ('Lättöl eller Julmust', 35.00),
                                                 ('Lokalt Bryggt Öl', 55.00);
 
--- 6. Clean up existing lunch menu data
+-- 7. Clean up existing lunch menu data
 DELETE FROM LUNCH_DISH
 WHERE LUNCH_ID IN (
     SELECT LUNCH_ID
@@ -60,7 +73,7 @@ WHERE LUNCH_ID IN (
 DELETE FROM LUNCH_MENU
 WHERE LUNCH_DATE BETWEEN '2025-02-24' AND '2025-03-02';
 
--- 7. Insert menu entries for current week
+-- 8. Insert menu entries for current week
 INSERT INTO LUNCH_MENU (LUNCH_DATE) VALUES
                                         ('2025-02-24'), -- Monday
                                         ('2025-02-25'), -- Tuesday
@@ -161,22 +174,25 @@ INSERT INTO LUNCH_DISH (LUNCH_DISH_NAME, LUNCH_DISH_PRICE, LUNCH_ID)
 SELECT 'Vegetarisk svamprisotto', 119.00, LUNCH_ID
 FROM LUNCH_MENU WHERE LUNCH_DATE = '2025-03-02';
 
--- 8. Sample Orders
+-- 9. Sample Orders
 INSERT INTO ORDERS (ORDER_DATE, TABLE_NUMBER, IS_FINISHED) VALUES
                                                                ('2025-02-24', 1, FALSE),
                                                                ('2025-02-24', 2, TRUE);
 
--- 9. Sample Order Items
+-- 10. Sample Order Items
 INSERT INTO ORDER_DISH (ORDER_DISH_ID, ORDER_ID, CATEGORY, DISH_NAME, DISH_COUNT, IS_FINISHED ) VALUES
     (1, 1, 'FÖRRÄTT', 'DANEIL', 1 , FALSE);
 
+-- 11. Work Shifts (Updated to use the new status field)
+INSERT INTO WORK_SHIFT (START_TIME, END_TIME, DESCRIPTION, EMPLOYEE_ID, SHIFT_STATUS) VALUES
+                                                                                          ('2025-02-24 08:00:00', '2025-02-24 16:00:00', 'Morgonpass', 1, 'ASSIGNED'),
+                                                                                          ('2025-02-24 16:00:00', '2025-02-24 23:59:59', 'Kvällspass', 2, 'ASSIGNED'),
+                                                                                          ('2025-02-25 08:00:00', '2025-02-25 16:00:00', 'Morgonpass', NULL, 'OPEN'),
+                                                                                          ('2025-02-25 16:00:00', '2025-02-25 23:59:59', 'Kvällspass', NULL, 'OPEN'),
+                                                                                          ('2025-02-26 08:00:00', '2025-02-26 16:00:00', 'Morgonpass', NULL, 'OPEN'),
+                                                                                          ('2025-02-26 16:00:00', '2025-02-26 23:59:59', 'Kvällspass', NULL, 'OPEN');
 
--- 10. Work Shifts
-INSERT INTO WORK_SHIFT (START_TIME, END_TIME, DESCRIPTION, EMPLOYEE_ID) VALUES
-                                                                            ('2025-02-24 08:00:00', '2025-02-24 16:00:00', 'Morgonpass', 1),
-                                                                            ('2025-02-24 16:00:00', '2025-02-24 23:59:59', 'Kvällspass', 2);
-
--- 11. Bookings
+-- 12. Bookings
 INSERT INTO BOOKING (NAME, EMAIL, PHONE, DATE, TIME, PEOPLE_COUNT)
 VALUES
     ('Alice Johnson', 'alice@example.com', '0701234567', '2025-02-24', '18:00:00', 4 ),
@@ -185,27 +201,6 @@ VALUES
     ('David Wilson', 'david@example.com', '0705556666', '2025-02-25', '18:30:00', 4),
     ('Eva Brown', 'eva@example.com', '0708889999', '2025-02-25', '18:30:00', 2),
     ('Frank Miller', 'frank@example.com', '0702223333', '2025-02-25', '20:00:00', 6);
-
--- Verify the lunch menu
-SELECT lm.LUNCH_DATE, ld.LUNCH_DISH_NAME, ld.LUNCH_DISH_PRICE
-FROM LUNCH_MENU lm
-         LEFT JOIN LUNCH_DISH ld ON lm.LUNCH_ID = ld.LUNCH_ID
-ORDER BY lm.LUNCH_DATE;
-
--- ============================================================================================================ --
-
-SHOW VARIABLES LIKE 'log_error';
--- ===========================================================
--- Delete existing lunch dishes and menus for the given dates
--- ===========================================================
-DELETE FROM LUNCH_DISH
-WHERE LUNCH_ID IN (
-    SELECT LUNCH_ID
-    FROM LUNCH_MENU
-    WHERE LUNCH_DATE BETWEEN '2025-02-17' AND '2025-02-23'
-);
-
-USE RestaurantDB;
 
 -- Clean up existing lunch menu data for the new week
 DELETE FROM LUNCH_DISH
@@ -318,10 +313,3 @@ FROM LUNCH_MENU WHERE LUNCH_DATE = '2025-03-09';
 INSERT INTO LUNCH_DISH (LUNCH_DISH_NAME, LUNCH_DISH_DESCRIPTION, LUNCH_DISH_PRICE, LUNCH_ID)
 SELECT 'Vegetariska biffar med svampsås', 'Saftiga vegetariska biffar med krämig svampsås, serveras med rostad potatis och lingon', 125.00, LUNCH_ID
 FROM LUNCH_MENU WHERE LUNCH_DATE = '2025-03-09';
-
-
--- Verify the lunch menu
-SELECT lm.LUNCH_DATE, ld.LUNCH_DISH_NAME, ld.LUNCH_DISH_DESCRIPTION, ld.LUNCH_DISH_PRICE
-FROM LUNCH_MENU lm
-         LEFT JOIN LUNCH_DISH ld ON lm.LUNCH_ID = ld.LUNCH_ID
-ORDER BY lm.LUNCH_DATE;

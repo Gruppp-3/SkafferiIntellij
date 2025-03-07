@@ -11,6 +11,17 @@ CREATE TABLE EMPLOYEE (
                           IS_ADMIN BOOLEAN
 );
 
+-- Tabell för tillgänglighet för varje anställd
+CREATE TABLE EMPLOYEE_AVAILABILITY (
+                                       AVAILABILITY_ID INT AUTO_INCREMENT PRIMARY KEY,
+                                       EMPLOYEE_ID INT,
+                                       DAY_OF_WEEK VARCHAR(10), -- 'MONDAY', 'TUESDAY', etc.
+                                       START_TIME TIME,
+                                       END_TIME TIME,
+                                       PREFERENCE VARCHAR(20) DEFAULT 'AVAILABLE', -- 'PREFERRED', 'AVAILABLE', 'UNAVAILABLE'
+                                       FOREIGN KEY (EMPLOYEE_ID) REFERENCES EMPLOYEE(EMPLOYEE_ID)
+);
+
 -- 2. Tabell för maträttstyper (förrätter, varmrätter, efterrätter, vegetariska, drycker)
 CREATE TABLE DISH_TYPE (
                            DISH_TYPE_ID INT AUTO_INCREMENT PRIMARY KEY,
@@ -63,7 +74,6 @@ CREATE TABLE ORDERS (
                         ORDER_DATE DATE,
                         TABLE_NUMBER INT,
                         IS_FINISHED BOOLEAN
-
 );
 
 -- 9. Tabell för beställda rätter
@@ -83,11 +93,10 @@ CREATE TABLE WORK_SHIFT (
                             START_TIME TIMESTAMP,
                             END_TIME TIMESTAMP,
                             DESCRIPTION VARCHAR(100),
-                            EMPLOYEE_ID INT,
+                            EMPLOYEE_ID INT NULL, -- This can be NULL until assigned
+                            SHIFT_STATUS ENUM('OPEN', 'ASSIGNED', 'COMPLETED') DEFAULT 'OPEN',
                             FOREIGN KEY (EMPLOYEE_ID) REFERENCES EMPLOYEE(EMPLOYEE_ID)
 );
-
-
 
 -- 11. Tabell för bokningar
 CREATE TABLE BOOKING (
@@ -100,7 +109,3 @@ CREATE TABLE BOOKING (
                          PEOPLE_COUNT INT NOT NULL,
                          CREATED_AT TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
-
-
-
-
