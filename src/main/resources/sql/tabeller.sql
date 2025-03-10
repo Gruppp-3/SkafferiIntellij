@@ -2,14 +2,16 @@ DROP DATABASE IF EXISTS RestaurantDB;
 CREATE DATABASE RestaurantDB;
 USE RestaurantDB;
 
+
 -- 1. Tabell för anställda
 CREATE TABLE EMPLOYEE (
-                          EMPLOYEE_ID INT AUTO_INCREMENT PRIMARY KEY,
+                          EMPLOYEE_ID INT PRIMARY KEY,
                           FIRST_NAME VARCHAR(25),
                           LAST_NAME VARCHAR(25),
                           PHONE_NUMBER VARCHAR(15),
                           IS_ADMIN BOOLEAN
 );
+
 
 -- Tabell för tillgänglighet för varje anställd
 CREATE TABLE EMPLOYEE_AVAILABILITY (

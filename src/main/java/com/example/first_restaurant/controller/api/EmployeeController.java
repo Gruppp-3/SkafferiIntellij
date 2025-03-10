@@ -31,4 +31,12 @@ public class EmployeeController {
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
+
+    //inloggning för personal App
+    @GetMapping("/verify/{id}")
+    public ResponseEntity<Boolean> verifyEmployeeId(@PathVariable Long id) {
+        boolean exists = employeeService.getEmployeeById(id).isPresent();
+        return ResponseEntity.ok(exists);
+    }
+
 }
