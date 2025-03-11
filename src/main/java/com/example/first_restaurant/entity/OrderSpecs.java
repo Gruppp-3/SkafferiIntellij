@@ -19,4 +19,14 @@ public class OrderSpecs {
     }
     public void setMeal(String meal){this.meal=meal;}
     public void setCount(Integer count){this.count=count;}
+    // Add this to OrderSpecs.java
+    private Boolean isReady;
+
+    public Boolean getIsReady() {
+        return isReady;
+    }
+
+    public void setIsReady(Boolean isReady) {
+        this.isReady = isReady;
+    }
 }

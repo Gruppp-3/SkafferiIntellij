@@ -60,28 +60,33 @@ public class KitchenService {
             dishRepository.save(dish);
         }
     }
-    public List<RecievedOrder> sendToWaiter(){
+
+    public List<RecievedOrder> sendToWaiter() {
         List<Order> orderList = orderRepository.findOrderByIsFinishedFalse();
         List<RecievedOrder> recievedOrderList = new ArrayList<>();
-        for(Order ord : orderList){
+
+        for (Order ord : orderList) {
             RecievedOrder order = new RecievedOrder();
             List<OrderSpecs> orderSpecs = new ArrayList<>();
             List<Dish> dishList = dishRepository.findAllByOrderID(ord.getId());
-            for(Dish dish : dishList){
-                if(!dish.getIsFinished()) continue;
+
+            // Include all dishes, not just finished ones
+            for (Dish dish : dishList) {
                 OrderSpecs orderspec = new OrderSpecs();
                 orderspec.setCategory(dish.getCategory());
                 orderspec.setMeal(dish.getDish_name());
                 orderspec.setCount(dish.getDish_count());
                 orderSpecs.add(orderspec);
             }
+
+            // Set orderSpecs even if empty
             order.setOrderSpecs(orderSpecs);
             order.setIsFinished(false);
             order.setTableNumber(ord.getTableNumber());
             recievedOrderList.add(order);
         }
-        return recievedOrderList;
 
+        return recievedOrderList;
     }
     /**
      * Fetches all active (unfinished) orders and their associated dishes.
