@@ -7,8 +7,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
-// Controller Classes
 @RestController
 @RequestMapping("/api/employees")
 public class EmployeeController {
@@ -20,9 +20,26 @@ public class EmployeeController {
         return ResponseEntity.ok(employeeService.getAllEmployees());
     }
 
+    // La till felhantering
     @PostMapping
-    public ResponseEntity<Employee> createEmployee(@RequestBody Employee employee) {
-        return ResponseEntity.ok(employeeService.saveEmployee(employee));
+    public ResponseEntity<?> createEmployee(@RequestBody Employee employee) {
+        try {
+            // Check if ID is provided
+            if (employee.getId() == null) {
+                return ResponseEntity.badRequest().body("Employee ID must be provided");
+            }
+
+            // Check if an employee with this ID already exists
+            if (employeeService.getEmployeeById(employee.getId()).isPresent()) {
+                return ResponseEntity.badRequest().body("An employee with this ID already exists");
+            }
+
+            Employee savedEmployee = employeeService.saveEmployee(employee);
+            return ResponseEntity.ok(savedEmployee);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(500).body("Error creating employee: " + e.getMessage());
+        }
     }
 
     @GetMapping("/{id}")
@@ -32,11 +49,40 @@ public class EmployeeController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    //inloggning för personal App
+    @PutMapping("/{id}")
+    public ResponseEntity<Employee> updateEmployee(@PathVariable Long id, @RequestBody Employee employee) {
+        Optional<Employee> existingEmployee = employeeService.getEmployeeById(id);
+
+        if (existingEmployee.isPresent()) {
+            // Ensure ID is set correctly
+            employee.setId(id);
+            Employee updatedEmployee = employeeService.saveEmployee(employee);
+            return ResponseEntity.ok(updatedEmployee);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteEmployee(@PathVariable Long id) {
+        try {
+            Optional<Employee> employee = employeeService.getEmployeeById(id);
+            if (employee.isPresent()) {
+                employeeService.deleteEmployee(id);
+                return ResponseEntity.noContent().build();
+            } else {
+                return ResponseEntity.notFound().build();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(500).body("Error deleting employee: " + e.getMessage());
+        }
+    }
+
+    // Login for staff app
     @GetMapping("/verify/{id}")
     public ResponseEntity<Boolean> verifyEmployeeId(@PathVariable Long id) {
         boolean exists = employeeService.getEmployeeById(id).isPresent();
         return ResponseEntity.ok(exists);
     }
-
 }
