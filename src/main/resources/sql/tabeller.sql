@@ -100,6 +100,8 @@
                                 FOREIGN KEY (EMPLOYEE_ID) REFERENCES EMPLOYEE(EMPLOYEE_ID) ON DELETE SET NULL
     );
 
+
+
     -- 11. Tabell för bokningar
     CREATE TABLE BOOKING (
                              BOOKING_ID INT AUTO_INCREMENT PRIMARY KEY,

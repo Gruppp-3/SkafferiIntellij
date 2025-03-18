@@ -175,6 +175,7 @@ INSERT INTO LUNCH_DISH (LUNCH_DISH_NAME, LUNCH_DISH_DESCRIPTION, LUNCH_DISH_PRIC
 SELECT 'Ugnsbakad lax med skaldjurssås', 'Saftig ugnsbakad lax med skaldjurssås, serveras med färskpotatis och sparris', 139.00, LUNCH_ID
 FROM LUNCH_MENU WHERE LUNCH_DATE = '2025-03-18';
 
+
 INSERT INTO LUNCH_DISH (LUNCH_DISH_NAME, LUNCH_DISH_DESCRIPTION, LUNCH_DISH_PRICE, LUNCH_ID)
 SELECT 'Vegetarisk moussaka', 'Smakrik vegetarisk moussaka med aubergine, linser och bechamelsås, serveras med grekisk sallad', 125.00, LUNCH_ID
 FROM LUNCH_MENU WHERE LUNCH_DATE = '2025-03-18';
